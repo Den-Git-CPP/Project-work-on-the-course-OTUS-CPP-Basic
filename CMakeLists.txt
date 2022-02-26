@@ -12,6 +12,8 @@ find_library(
 
 add_executable(taf
 main_taf.cpp
+download_weather_curl.h
+source/Main_Inform_TAF.cpp
 )
 
 target_link_libraries(
@@ -23,7 +25,6 @@ target_include_directories(
     PRIVATE include 
     PRIVATE "${CURL_PATH}/include"
                     )    
-
 
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR
     CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
