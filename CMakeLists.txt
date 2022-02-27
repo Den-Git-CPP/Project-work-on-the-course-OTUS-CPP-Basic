@@ -14,11 +14,12 @@ add_executable(taf
 main_taf.cpp
 download_weather_curl.h
 source/Main_Inform_TAF.cpp
+source/ForecastNode.cpp
 )
 
 target_link_libraries(
     taf
-                ${LIB_CURL})
+     ${LIB_CURL})
         
 target_include_directories(
     taf
@@ -44,3 +45,6 @@ elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 endif()
 
 target_compile_features(taf PUBLIC cxx_std_17)
+
+install(TARGETS taf DESTINATION myprogramm)
+install(FILES Struct_Taf_Forecast.txt DESTINATION myprogramm)

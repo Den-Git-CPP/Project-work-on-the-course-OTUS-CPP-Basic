@@ -6,12 +6,14 @@
 #include <vector>
 #include <map>
 
+#include "ForecastNode.h"
+
 class Main_Inform_TAF
 {
 public:
 	Main_Inform_TAF();
 	Main_Inform_TAF(std::vector<std::string>& in_data);
-	~Main_Inform_TAF(){};
+	~Main_Inform_TAF();
 	void transform();
 	void display();
 
@@ -26,6 +28,7 @@ private:
  float latitude_{};
  float longitude_{};
  float elevation_m_{};
-
+ std::vector<Forecast> all_forecast_node;//вектор подпрогнозов
+ Forecast* forecast=nullptr; std::vector<std::string>v_init_forecast; //инициализация вектором
  std::string replace_raw_taf(const std::string& raw_str_taf);
 };
