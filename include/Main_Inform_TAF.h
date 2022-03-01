@@ -1,14 +1,13 @@
 #pragma once
 #include <fstream>
-#include <sstream>
 #include <algorithm>
 #include <iterator>
 #include <vector>
 #include <map>
-
+#include "Function.h"
 #include "ForecastNode.h"
 
-class Main_Inform_TAF
+class Main_Inform_TAF:private Function
 {
 public:
 	Main_Inform_TAF();
@@ -28,7 +27,9 @@ private:
  float latitude_{};
  float longitude_{};
  float elevation_m_{};
- std::vector<Forecast> all_forecast_node;//вектор подпрогнозов
- Forecast* forecast=nullptr; std::vector<std::string>v_init_forecast; //инициализация вектором
+ std::vector<Forecast> all_forecast_node;
+ Forecast* forecast=nullptr; std::vector<std::string>v_init_forecast;
+
  std::string replace_raw_taf(const std::string& raw_str_taf);
 };
+

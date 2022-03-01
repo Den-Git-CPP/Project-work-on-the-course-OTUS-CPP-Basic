@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdlib>
 #include <vector>
 #include "download_weather_curl.h"
 #include "Main_Inform_TAF.h"
@@ -15,7 +16,7 @@ std::vector<std::string>& split(const std::string& data_for_split, char delim, s
 std::vector<std::string> read_weather_file_vRaw(const std::string& path)
 {
 	std::vector<std::string> m_vRawStruct, vRaw_Element;
-	// проверка структуры файла
+	// �������� ��������� �����
 	std::fstream fin;
 	fin.open("Struct_Taf_Forecast.txt");
 	if (!fin.is_open()) {
@@ -37,7 +38,7 @@ std::vector<std::string> read_weather_file_vRaw(const std::string& path)
 	fin.close();
 
 	if (m_vRawStruct[0] == "No errors" && m_vRawStruct[1] == "No warnings" && m_vRawStruct[5] == Struct_Taf_Forecast_etalon)
-	{// берем крайний прогноз
+	{// ����� ������� �������
 			split(m_vRawStruct[6],',',vRaw_Element);
 	}
 	else
@@ -59,6 +60,8 @@ int main() {
 
 	std::vector<std::string> raw_data = read_weather_file_vRaw(ICAO_airport_name + ".txt");
 	Main_Inform_TAF TAF(raw_data);	// инициализировали
+	TAF.transform();				// перевели	
+	TAF.display();					// показали
 	
 	std::cout << "\n";
 	system("pause");

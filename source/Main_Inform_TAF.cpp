@@ -9,49 +9,67 @@ Main_Inform_TAF::Main_Inform_TAF(std::vector<std::string>& in_data)
 	valid_time_from_ = in_data.at(4);
 	valid_time_to_ = in_data.at(5);
 	remarks_=in_data.at(6);
-	//Р”РѕР»РіРѕС‚Р° Рё С€РёСЂРѕС‚Р° Р°СЂРѕРїРѕСЂС‚Р°
+	//Долгота и широта аропорта
 	latitude_=std::stof(in_data.at(7));
 	longitude_=std::stof(in_data.at(8));
-	// РїСЂРµРІС‹С€РµРЅРёРµ Р°СЌСЂРѕРїРѕСЂС‚Р°
+	// превыщение аэропорта
 	elevation_m_=std::stof(in_data.at(9));
-	//СЃРѕР·РґР°РµРј РІРµРєС‚РѕСЂ СЃРІРѕРґРѕРє РїСЂРѕРіРЅРѕР·Р° РїРѕ РІСЂРµРјРµРЅР°Рј 
+	//создаем вектор сводок прогноза по временам 
 	all_forecast_node.reserve(10);
 	auto it = in_data.begin() + 10;
-	while ((it != in_data.end()) and (*it != "")){	
-		v_init_forecast.assign(it, it + 37);
+	Function::load_map_dictionary("NameAirport.txt",map_airport_Dictionary);
+	
+	while ((it != in_data.end()) and (*it != ""))
+	{	v_init_forecast.assign(it, it + 37);
 		Forecast* frc = new Forecast(v_init_forecast);
 		all_forecast_node.push_back(*frc);
 		std::advance(it, 37);
-	};
+	}
 }
+
 Main_Inform_TAF::~Main_Inform_TAF()
 {
-	
-}
-void Main_Inform_TAF::transform(){ 	
-//TODO РїСЂРѕРґСѓРјР°С‚СЊ РєР»Р°СЃСЃ С„СѓРЅРєС†РёР№ РґР»СЏ РїРµСЂРµРІРѕРґР° РјРµСЂ
-	
+	delete [] forecast;
 }
 
-void Main_Inform_TAF::display(){
-	cout<< "Р”Р°С‚Р° Рё РІСЂРµРјСЏ РїРѕРґРіРѕС‚РѕРІРєРё РїСЂРѕРіРЅРѕР·Р°: " << issue_time_ << "\n"
-		<< "Р’СЂРµРјСЏ РІС‹РїСѓСЃРєР° Р±СЋР»Р»РµС‚РµРЅСЏ РїСЂРѕРіРЅРѕР·Р°: "<< bulletin_time_ << "\n"
-		<< "Р”РµР№СЃС‚РІСѓРµС‚  СЃ:                     "<< valid_time_from_ << "\n"
-		<< "Р”РµР№СЃС‚РІСѓРµС‚ РїРѕ:                     "<< valid_time_to_ << "\n"
-		<< "Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅР°СЏ РёРЅС„РѕСЂРјР°С†РёСЏ:        " << remarks_ << "\n"
-		<< "РђСЌСЂРѕРїРѕСЂС‚:" << station_id_ << "\t"
-		<< "РЁРёСЂРѕС‚Р°:" << latitude_ << "\t"
-		<< "Р”РѕР»РіРѕС‚Р°:" << longitude_ << "\t"
-		<< "РџСЂРµРІС‹С€РµРЅРёРµ:" << elevation_m_ << "\n"
-		<< "РЎРІРѕРґРєР°:" << raw_text_ << "\n";
-//РѕС‚РѕР±СЂР°Р·РёР»Рё РєР°Р¶РґС‹Р№ РїРѕРґРїСЂРѕРіРЅРѕР· РІ РІРµРєС‚РѕСЂРµ РїСЂРѕРіРЅРѕР·РѕРІ all_forecast_node
- 	for (auto it = all_forecast_node.begin(); it != all_forecast_node.end(); it++){
-	it->display();
-		}
+void Main_Inform_TAF::transform()
+{  //отформатирован чистый текст raw_text_taf
+	raw_text_ = replace_raw_taf(raw_text_);
+	//переведено название аэропорта
+	station_id_ = Function::replace_station_id_(station_id_);
+	//отформатировано время из ISO8601 UTC  в необходимый формат UTC
+	issue_time_ = Function::replace_format_time(issue_time_);
+	bulletin_time_ = Function::replace_format_time(bulletin_time_);
+	valid_time_from_ = Function::replace_format_time(valid_time_from_);
+	valid_time_to_ = Function::replace_format_time(valid_time_to_);
+	//перевели каждый подпрогноз в векторе прогнозов all_forecast_node
+	for (auto it = all_forecast_node.begin(); it != all_forecast_node.end(); it++)
+	{
+		it->forecast_transform();
+	}
 }
+
+void Main_Inform_TAF::display()
+{	cout<< "Date and time the forecast was prepared:\t" << issue_time_ << "\n"
+		<< "Bulletin time:\t\t\t\t\t"<< bulletin_time_ << "\n"
+		<< "The start time of when the report is valid:\t"<< valid_time_from_ << "\n"
+		<< "The end time for when the report is valid:\t"<< valid_time_to_ << "\n"
+		<< "Any remarks.\t" << remarks_ << "\n"
+		<< "Airport: " << station_id_ << "\t"
+		<< "Latitude: " << latitude_ << "\t"
+		<< "Longitude: " << longitude_ << "\t"
+		<< "Elevation: " << elevation_m_ << "\n"
+		<< "RAWTEXT:" << raw_text_ << "\n";
+//отобразили каждый подпрогноз в векторе прогнозов all_forecast_node
+ for (auto it = all_forecast_node.begin(); it != all_forecast_node.end(); it++)
+{
+	it->display();
+}
+ }
 
 std::string Main_Inform_TAF::replace_raw_taf(const std::string& raw_str_taf)
-{	std::istringstream ss(raw_str_taf);
+{
+	std::istringstream ss(raw_str_taf);
 	std::ostringstream os;
 
 	std::for_each(
@@ -64,7 +82,7 @@ std::string Main_Inform_TAF::replace_raw_taf(const std::string& raw_str_taf)
 				(s == "FM")
 				)
 			{
-				os << "\n\t" << s << "\t";
+				os << "\n\t " << s << "\t";
 			}
 			else
 			{
@@ -74,7 +92,3 @@ std::string Main_Inform_TAF::replace_raw_taf(const std::string& raw_str_taf)
 			);
 	return os.str();
 }
-
-
-
-

@@ -13,8 +13,12 @@ find_library(
 add_executable(taf
 main_taf.cpp
 download_weather_curl.h
-source/Main_Inform_TAF.cpp
 source/ForecastNode.cpp
+source/Function.cpp
+source/Main_Inform_TAF.cpp
+source/Visibility.cpp
+source/Wind_Shear.cpp
+source/Wind.cpp
 )
 
 target_link_libraries(
