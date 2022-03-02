@@ -16,9 +16,8 @@ std::vector<std::string>& split(const std::string& data_for_split, char delim, s
 std::vector<std::string> read_weather_file_vRaw(const std::string& path)
 {
 	std::vector<std::string> m_vRawStruct, vRaw_Element;
-	//   
 	std::fstream fin;
-	fin.open("Struct_Taf_Forecast.txt");
+	fin.open("../dictionary/Struct_Taf_Forecast.txt");
 	if (!fin.is_open()) {
 		std::cout << "File Struct_Taf_Forecast not found " << std::endl;
 		std::cout << "Need Struct_Taf_Forecast.txt" << std::endl;
@@ -38,7 +37,7 @@ std::vector<std::string> read_weather_file_vRaw(const std::string& path)
 	fin.close();
 
 	if (m_vRawStruct[0] == "No errors" && m_vRawStruct[1] == "No warnings" && m_vRawStruct[5] == Struct_Taf_Forecast_etalon)
-	{//   
+	{ 
 			split(m_vRawStruct[6],',',vRaw_Element);
 	}
 	else
@@ -54,16 +53,17 @@ std::vector<std::string> read_weather_file_vRaw(const std::string& path)
  
 int main() {
 	std::setlocale(LC_ALL, "Russian_Russia.1251");
-    std::cout<<"Введите название аэропорта\t";
+    std::cout<<"Введит четерехбуквенный код аэропорта\t";
     std::string ICAO_airport_name; std::cin>>ICAO_airport_name;
-    DownloadFile(ICAO_airport_name);// закачали файл 
-
+    DownloadFile(ICAO_airport_name); 
 	std::vector<std::string> raw_data = read_weather_file_vRaw(ICAO_airport_name + ".txt");
-	Main_Inform_TAF TAF(raw_data);	// инициализировали
-	TAF.transform();				// перевели	
-	TAF.display();					// показали
+
+	Main_Inform_TAF TAF(raw_data);	 
+	TAF.transform();				 
+	TAF.display();					 
 	
 	std::cout << "\n";
+	
 	system("pause");
 
 	}

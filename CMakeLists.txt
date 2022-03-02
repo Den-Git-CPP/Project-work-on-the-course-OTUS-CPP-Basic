@@ -23,13 +23,14 @@ source/Wind.cpp
 
 target_link_libraries(
     taf
-     ${LIB_CURL})
+     ${LIB_CURL}
+)
         
 target_include_directories(
     taf
     PRIVATE include 
     PRIVATE "${CURL_PATH}/include"
-                    )    
+)    
 
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR
     CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
@@ -50,5 +51,10 @@ endif()
 
 target_compile_features(taf PUBLIC cxx_std_17)
 
-install(TARGETS taf DESTINATION myprogramm)
-install(FILES Struct_Taf_Forecast.txt DESTINATION myprogramm)
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/!MyProgram)
+#"Dictionary copy in: ${CMAKE_SOURCE_DIR}/dictionary"
+add_custom_target(copy_target ALL
+ ${CMAKE_COMMAND} -E copy_directory     ${CMAKE_SOURCE_DIR}/dictionary 
+                                        ${EXECUTABLE_OUTPUT_PATH}/dictionary 
+                                        DEPENDS taf
+)
