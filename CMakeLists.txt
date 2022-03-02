@@ -15,10 +15,15 @@ main_taf.cpp
 download_weather_curl.h
 source/ForecastNode.cpp
 source/Function.cpp
+source/Icing.cpp
 source/Main_Inform_TAF.cpp
+source/Sky_Cover.cpp
+source/Surface_Temperature.cpp
+source/Turbulence.cpp
 source/Visibility.cpp
 source/Wind_Shear.cpp
 source/Wind.cpp
+source/Wx.cpp
 )
 
 target_link_libraries(
