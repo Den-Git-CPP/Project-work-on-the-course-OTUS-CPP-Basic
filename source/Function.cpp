@@ -20,11 +20,11 @@ std::string Function::replace_format_time(const std::string& str_time)
 	std::istringstream ss(str_time);
 	std::ostringstream os;
 	ss >> std::get_time(&t, "%Y-%m-%dT%H:%M:%SZ");
-	if (str_time != "") {		//РїСЂРѕРІРµСЂРєР° РЅР° РїСѓСЃС‚РѕС‚Сѓ
-		if (ss.fail()) {		//РїСЂРѕРІРµСЂРєР° РЅР° С„РѕСЂРјР°С‚
+	if (str_time != "") {		//проверка на пустоту
+		if (ss.fail()) {		//проверка на формат
 		std::cout << "Parse DATE_TIME failed\n";
 		}
-		else {					//РІСЃРµ РЅРѕСЂРј
+		else {					//все норм
 		os << std::put_time(&t, "%H:%M:%S %d-%m-%Y  UTC");
 		}
 	}
@@ -52,24 +52,24 @@ std::string Function::replace_wx_string_(std::string& wx_string_)
 
 void Function::replace_change_indicator(std::string& change_indicator_)
 {	if (!change_indicator_.empty()) {
-		if (change_indicator_ == "") change_indicator_ = "FORECAST: ";
-		if (change_indicator_ == "TEMPO") change_indicator_ = "SOMETIMES: ";
-		if (change_indicator_ == "BECMG") change_indicator_ = "CHANGE: ";
-		if (change_indicator_ == "FM")	change_indicator_ = "CHANGES: ";
+		if (change_indicator_ == "") change_indicator_ = "ПРОГНОЗ: ";
+		if (change_indicator_ == "TEMPO") change_indicator_ = "ВРЕМЕНАМИ: ";
+		if (change_indicator_ == "BECMG") change_indicator_ = "УСТОЙЧИВО: ";
+		if (change_indicator_ == "FM")	change_indicator_ = "ИЗМЕНЕНИЯ: ";
 	}
 }
 
 void Function::replace_sky_cover_(std::string& sky_cover_)
 {
 	if (!sky_cover_.empty()) {
-		if (sky_cover_ == "NSC")	sky_cover_ = "No significant cloud cover\t";
-		if (sky_cover_ == "SKC")	sky_cover_ = "The sky is clear\t";
-		if (sky_cover_ == "CLR")	sky_cover_ = "No cloud below 3700m ";
-		if (sky_cover_ == "SCT")	sky_cover_ = "Scattered clouds\t ";
+		if (sky_cover_ == "NSC")	sky_cover_ = "Без существенной облачность ";
+		if (sky_cover_ == "SKC")	sky_cover_ = "Небо чистое ";
+		if (sky_cover_ == "CLR")	sky_cover_ = "Нет облачности ниже 3700м ";
+		if (sky_cover_ == "SCT")	sky_cover_ = "Рассеянная облачность\t ";
 		if (sky_cover_ == "SKT")	sky_cover_ = "SKT";
-		if (sky_cover_ == "BKN")	sky_cover_ = "Significant cloud cover\t";
-		if (sky_cover_ == "FEW")	sky_cover_ = "Partly cloudy\t";
-		if (sky_cover_ == "OVC")	sky_cover_ = "Overcast\t ";
+		if (sky_cover_ == "BKN")	sky_cover_ = "Значительная облачность ";
+		if (sky_cover_ == "FEW")	sky_cover_ = "Незначительная облачность ";
+		if (sky_cover_ == "OVC")	sky_cover_ = "Сплошная облачность\t ";
 		if (sky_cover_ == "OVCX")	sky_cover_ = "OVCX";
 	}
 }
@@ -77,8 +77,8 @@ void Function::replace_sky_cover_(std::string& sky_cover_)
 void Function::replace_cloud_type_(std::string& cloud_type_)
 {
 	if (!cloud_type_.empty()) {
-		if (cloud_type_ == "CB") cloud_type_ = " (cumulonimbus)";
-		if (cloud_type_ == "TCU") cloud_type_ = " (powerful cumulonimbus)";
+		if (cloud_type_ == "CB") cloud_type_ = " (кучеводождевая)";
+		if (cloud_type_ == "TCU") cloud_type_ = " (мощно-кучеводождевая)";
 		if (cloud_type_ == "CU") cloud_type_ = " CU";
 	}
 }

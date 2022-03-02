@@ -14,9 +14,9 @@ void Wind::wind_transform()
 void Wind::wind_display()
 {
 	if (wind_dir_degrees_ != "") {
-	std::cout << "Wind: " << wind_dir_degrees_ << "°" << " " << wind_speed_kt_ << "m/s. ";
+	std::cout << "Ветер: " << wind_dir_degrees_ << "°" << " " << wind_speed_kt_ << " м/с.";
 	}
 if (wind_gust_kt_ != "") {
-	std::cout << "Gust of wind:" << wind_gust_kt_ << "m/s. ";;
+	std::cout << " порывы " << wind_gust_kt_ << "м/с.";;
 	}
 }

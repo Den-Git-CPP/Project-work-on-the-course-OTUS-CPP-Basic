@@ -13,9 +13,9 @@ void Wind_Shear::wind_shear_transform()
 
 void Wind_Shear::wind_shear_display()
 {	if (wind_shear_hgt_ft_agl_ != "") {
-		std::cout << "\nWind shear: "
+		std::cout << "\n—двиг ветра на высоте"
 			<< wind_shear_hgt_ft_agl_
 			<< " " << wind_shear_dir_degrees_ << "∞"
-			<< " " << wind_shear_speed_kt_ << "m/s .";
+			<< " " << wind_shear_speed_kt_ << " м/с";
 	}	
 }

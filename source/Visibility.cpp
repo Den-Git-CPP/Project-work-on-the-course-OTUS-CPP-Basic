@@ -16,13 +16,13 @@ void Visibility::visibility_transform()
 
 void Visibility::visibility_display()
 {	if (visibility_statute_mi_ != "") {
-		std::cout << "\nVisibility:" << " " << visibility_statute_mi_ << "m.";
+		std::cout << "\nВидимость:" << " " << visibility_statute_mi_ << " м.";
 	}
 	if (altim_in_hg_ != "") {
-		std::cout << "\nAltimeter: " << " " << altim_in_hg_ << "mm Hg";
+		std::cout << "\nДавление аэропорта:" << " " << altim_in_hg_ << " мм рт.ст.";
 	}
 	if (vert_vis_ft_ != "") {
-		std::cout << "\nVertical visibility: " << " " << vert_vis_ft_ << "m.";
+		std::cout << "\nВертикальная видимость: " << " " << vert_vis_ft_ << " м.";
 	}
 	
 }

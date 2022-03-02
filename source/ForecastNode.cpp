@@ -7,14 +7,14 @@ Forecast::Forecast(std::vector<std::string>& in_forecast_data)
 	time_becoming_ = in_forecast_data.at(3);
 	probability_=in_forecast_data.at(4);
 
-	//РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РїРѕРґРєР»Р°СЃСЃРѕРІ СЏРІР»РµРЅРёР№ РІ СЃРѕСЃС‚Р°РІРµ Forecast
-	in_wind_data.assign(in_forecast_data.begin() + 5, in_forecast_data.begin() + 8);//РІРµС‚РµСЂ
+	//инициализация подклассов явлений в составе Forecast
+	in_wind_data.assign(in_forecast_data.begin() + 5, in_forecast_data.begin() + 8);//ветер
 	wind= new Wind(in_wind_data);
 	
-	in_wind_shear_data.assign(in_forecast_data.begin() + 8, in_forecast_data.begin() + 11);//СЃРґРІРёРі РІРµС‚СЂР°
+	in_wind_shear_data.assign(in_forecast_data.begin() + 8, in_forecast_data.begin() + 11);//сдвиг ветра
 	wind_shear = new Wind_Shear(in_wind_shear_data);
 	
-	in_visibility_data.assign(in_forecast_data.begin() + 11, in_forecast_data.begin() + 14);//РІРёРґРёРјРѕСЃС‚СЊ
+	in_visibility_data.assign(in_forecast_data.begin() + 11, in_forecast_data.begin() + 14);//видимость
 	visibility = new Visibility(in_visibility_data);
 }
 
@@ -29,19 +29,19 @@ void Forecast::forecast_transform()
  fcst_time_to_ = Function::replace_format_time(fcst_time_to_);
  Function::replace_change_indicator(change_indicator_);
  time_becoming_ = Function::replace_format_time(time_becoming_);
- // С‚СЂР°РЅСЃС„РѕСЂРјРёСЂРѕРІР°Р»Рё РїРѕРґРєР°Р»Р°СЃСЃС‹СЃ СЏРІР»РµРЅРёСЏРјРё
+ // трансформировали подкалассыс явлениями
  wind->wind_transform();
  wind_shear->wind_shear_transform();
  visibility->visibility_transform();
 }
 
 void Forecast::display()
-{	std::cout << "\nFrom " << fcst_time_from_ << " to " << fcst_time_to_ << "\n";
+{	std::cout << "\nВ период с " << fcst_time_from_ << " по " << fcst_time_to_ << "\n";
 if (change_indicator_ != "") { std::cout << change_indicator_; };
-if (time_becoming_ != "") { std::cout <<"time becoming " << time_becoming_ << "\n"; };
-if (probability_ != "") { std::cout << "with probability " << probability_ << "%"; };
+if (time_becoming_ != "") { std::cout <<"начиная c " << time_becoming_; };
+if (probability_ != "") { std::cout << "c вероятностью " << probability_ << "%"; };
 
-// РѕС‚РѕР±СЂР°Р·РёР»Рё РїРѕРґРєР°Р»Р°СЃСЃС‹СЃ СЏРІР»РµРЅРёСЏРјРё
+// отобразили подкалассыс явлениями
 wind->wind_display();
 wind_shear->wind_shear_display();
 visibility->visibility_display();

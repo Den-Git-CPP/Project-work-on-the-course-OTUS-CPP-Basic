@@ -50,16 +50,16 @@ void Main_Inform_TAF::transform()
 }
 
 void Main_Inform_TAF::display()
-{	cout<< "Date and time the forecast was prepared:\t" << issue_time_ << "\n"
-		<< "Bulletin time:\t\t\t\t\t"<< bulletin_time_ << "\n"
-		<< "The start time of when the report is valid:\t"<< valid_time_from_ << "\n"
-		<< "The end time for when the report is valid:\t"<< valid_time_to_ << "\n"
-		<< "Any remarks.\t" << remarks_ << "\n"
-		<< "Airport: " << station_id_ << "\t"
-		<< "Latitude: " << latitude_ << "\t"
-		<< "Longitude: " << longitude_ << "\t"
-		<< "Elevation: " << elevation_m_ << "\n"
-		<< "RAWTEXT:" << raw_text_ << "\n";
+{	cout<< "Дата и время подготовки прогноза: " << issue_time_ << "\n"
+		<< "Время выпуска бюллетеня прогноза: "<< bulletin_time_ << "\n"
+		<< "Действует  с:                     "<< valid_time_from_ << "\n"
+		<< "Действует по:                     "<< valid_time_to_ << "\n"
+		<< "Дополнительная информация:        " << remarks_ << "\n"
+		<< "Аэропорт:" << station_id_ << "\t"
+		<< "Широта:" << latitude_ << "\t"
+		<< "Долгота:" << longitude_ << "\t"
+		<< "Превышение:" << elevation_m_ << "\n"
+		<< "Сводка:" << raw_text_ << "\n";
 //отобразили каждый подпрогноз в векторе прогнозов all_forecast_node
  for (auto it = all_forecast_node.begin(); it != all_forecast_node.end(); it++)
 {
