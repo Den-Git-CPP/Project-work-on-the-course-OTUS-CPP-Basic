@@ -54,12 +54,10 @@ elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     )
 endif()
 
+set(MY_PROG_PATCH  ${PROJECT_SOURCE_DIR}/!MyProgram)
+install (TARGETS taf DESTINATION ${MY_PROG_PATCH})
+install (DIRECTORY dictionary DESTINATION ${MY_PROG_PATCH})
+
 target_compile_features(taf PUBLIC cxx_std_17)
 
-set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/!MyProgram)
-#"Dictionary copy in: ${CMAKE_SOURCE_DIR}/dictionary"
-add_custom_target(copy_target ALL
- ${CMAKE_COMMAND} -E copy_directory     ${CMAKE_SOURCE_DIR}/dictionary 
-                                        ${EXECUTABLE_OUTPUT_PATH}/dictionary 
-                                        DEPENDS taf
-)
+

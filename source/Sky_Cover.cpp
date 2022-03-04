@@ -34,18 +34,18 @@ void Sky_Cover::sky_cover_transform()
 
 void Sky_Cover::sky_cover_display()
 {if (!sky_cover_.empty()) {
-	std::cout << sky_cover_
+	std::cout <<"\n"<< sky_cover_
 	<< " на " << cloud_base_ft_agl_ << " м."
-			  << cloud_type_<<"\n";
+			  << cloud_type_;
 	}
 if (!sky_cover1_.empty()) {
-	std::cout << sky_cover1_
+	std::cout  <<"\n"<< sky_cover1_
 	<< " на " << cloud_base_ft_agl1_ << " м."
-			  << cloud_type1_ << "\n";
+			  << cloud_type1_;
 	}
 if (!sky_cover2_.empty()) {
-	std::cout << sky_cover2_
+	std::cout  <<"\n"<< sky_cover2_
 	<< " на " << cloud_base_ft_agl2_ << " м."
-			  << cloud_type2_ << "\n";
+			  << cloud_type2_;
 	}
 }

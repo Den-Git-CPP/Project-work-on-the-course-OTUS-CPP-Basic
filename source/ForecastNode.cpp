@@ -61,8 +61,8 @@ void Forecast::forecast_transform()
 }
 
 void Forecast::display()
-{	std::cout << "\nВ период с " << fcst_time_from_ << " по " << fcst_time_to_ << "\n";
-if (change_indicator_ != "") { std::cout << change_indicator_; };
+{	std::cout << "\n\nВ период с " << fcst_time_from_ << " по " << fcst_time_to_;
+if (change_indicator_ != "") { std::cout <<"\n"<< change_indicator_; };
 if (time_becoming_ != "") { std::cout <<"начиная c " << time_becoming_; };
 if (probability_ != "") { std::cout << "c вероятностью " << probability_ << "%"; };
 

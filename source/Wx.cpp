@@ -11,6 +11,6 @@ void Wx::wx_transform()
 }
 
 void Wx::wx_display()
-{   if (wx_string_ != "") { std::cout << "\nявлени€: " << wx_string_ << "\n"; }
-    if (not_decoded_ != "") { std::cout << "\nне декодировано:" << not_decoded_<<"\n"; }
+{   if (wx_string_ != "") { std::cout << "\nявлени€: " << wx_string_; }
+   // if (not_decoded_ != "") { std::cout << "\nне декодировано:" << not_decoded_; }
 }

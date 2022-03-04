@@ -9,12 +9,9 @@ Main_Inform_TAF::Main_Inform_TAF(std::vector<std::string>& in_data)
 	valid_time_from_ = in_data.at(4);
 	valid_time_to_ = in_data.at(5);
 	remarks_=in_data.at(6);
-	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	latitude_=std::stof(in_data.at(7));
 	longitude_=std::stof(in_data.at(8));
-	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	elevation_m_=std::stof(in_data.at(9));
-	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 
 	all_forecast_node.reserve(10);
 	auto it = in_data.begin() + 10;
 	Function::load_map_dictionary("../dictionary/NameAirport.txt",map_airport_Dictionary);
@@ -59,7 +56,7 @@ void Main_Inform_TAF::display()
 		<< "Широта:" << latitude_ << "\t"
 		<< "Долгота:" << longitude_ << "\t"
 		<< "Превышение:" << elevation_m_ << "\n"
-		<< "Сводка:" << raw_text_ << "\n";
+		<< "Сводка:" << raw_text_;
 //отобразили каждый подпрогноз в векторе прогнозов all_forecast_node
  for (auto it = all_forecast_node.begin(); it != all_forecast_node.end(); it++)
 {

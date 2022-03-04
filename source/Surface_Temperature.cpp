@@ -33,6 +33,6 @@ void Surface_Temperature::surface_temperature_display()
 		std::cout << valid_time1_
 			<< "\nПриземная температура "
 			<< sfc_temp_c1_
-			<< max_or_min_temp_c1_ << "\n";
+			<< max_or_min_temp_c1_;
 	}
 }
