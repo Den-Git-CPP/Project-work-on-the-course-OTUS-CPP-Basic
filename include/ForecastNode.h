@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include "colored_cout.h"
 #include "Function.h"
 #include "Wind.h"
 #include "Wind_Shear.h"

@@ -64,12 +64,12 @@ void Function::replace_sky_cover_(std::string& sky_cover_)
 	if (!sky_cover_.empty()) {
 		if (sky_cover_ == "NSC")	sky_cover_ = "Без существенной облачность ";
 		if (sky_cover_ == "SKC")	sky_cover_ = "Небо чистое ";
-		if (sky_cover_ == "CLR")	sky_cover_ = "Нет облачности ниже 3700м ";
-		if (sky_cover_ == "SCT")	sky_cover_ = "Рассеянная облачность\t ";
-		if (sky_cover_ == "SKT")	sky_cover_ = "SKT";
-		if (sky_cover_ == "BKN")	sky_cover_ = "Значительная облачность ";
+		if (sky_cover_ == "CLR")	sky_cover_ = "Нет облачности ниже 3700м";
+		if (sky_cover_ == "BKN")	sky_cover_ = "Значительная облачность   ";
 		if (sky_cover_ == "FEW")	sky_cover_ = "Незначительная облачность ";
-		if (sky_cover_ == "OVC")	sky_cover_ = "Сплошная облачность\t ";
+		if (sky_cover_ == "OVC")	sky_cover_ = "Сплошная облачность       ";
+		if (sky_cover_ == "SCT")	sky_cover_ = "Рассеянная облачность     ";
+		if (sky_cover_ == "SKT")	sky_cover_ = "SKT";
 		if (sky_cover_ == "OVCX")	sky_cover_ = "OVCX";
 	}
 }

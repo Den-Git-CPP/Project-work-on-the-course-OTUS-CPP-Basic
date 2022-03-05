@@ -5,7 +5,9 @@
 #include <vector>
 #include <map>
 #include "Function.h"
+#include "colored_cout.h"
 #include "ForecastNode.h"
+
 
 class Main_Inform_TAF:private Function
 {

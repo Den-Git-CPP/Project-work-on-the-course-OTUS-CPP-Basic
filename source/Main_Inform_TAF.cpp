@@ -52,7 +52,9 @@ void Main_Inform_TAF::display()
 		<< "Действует  с:                     "<< valid_time_from_ << "\n"
 		<< "Действует по:                     "<< valid_time_to_ << "\n"
 		<< "Дополнительная информация:        " << remarks_ << "\n"
-		<< "Аэропорт:" << station_id_ << "\t"
+		<<clr::yellow
+		<< "Аэропорт:" << station_id_ 
+		<<clr::white<< "\t"
 		<< "Широта:" << latitude_ << "\t"
 		<< "Долгота:" << longitude_ << "\t"
 		<< "Превышение:" << elevation_m_ << "\n"
@@ -79,7 +81,7 @@ std::string Main_Inform_TAF::replace_raw_taf(const std::string& raw_str_taf)
 				(s == "FM")
 				)
 			{
-				os << "\n\t " << s << "\t";
+				os << "\n        " << s << " ";
 			}
 			else
 			{

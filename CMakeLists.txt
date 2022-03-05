@@ -10,9 +10,11 @@ find_library(
         PATHS 
             ${CURL_PATH}/lib)
 
+
 add_executable(taf
 main_taf.cpp
 download_weather_curl.h
+source/colored_cout.cpp
 source/ForecastNode.cpp
 source/Function.cpp
 source/Icing.cpp
