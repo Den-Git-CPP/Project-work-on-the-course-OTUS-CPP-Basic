@@ -56,14 +56,11 @@ int main() {
     std::cout<<"Введит четерехбуквенный код аэропорта\t";
     std::string ICAO_airport_name; std::cin>>ICAO_airport_name;
     DownloadFile(ICAO_airport_name); 
-	std::vector<std::string> raw_data = read_weather_file_vRaw(ICAO_airport_name + ".txt");
-
+	std::vector<std::string> raw_data = read_weather_file_vRaw(ICAO_airport_name + "_TAF.txt");
 	Main_Inform_TAF TAF(raw_data);	 
 	TAF.transform();				 
 	TAF.display();					 
 	
 	std::cout << "\n";
-	
 	system("pause");
-
-	}
+}
