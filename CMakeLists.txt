@@ -13,13 +13,14 @@ find_library(
 
 add_executable(taf
 main_taf.cpp
-
 source/colored_cout.cpp
 source/ForecastNode.cpp
 source/Function.cpp
 source/Icing.cpp
+source/Main_Inform_METAR.cpp
 source/Main_Inform_TAF.cpp
 source/Sky_Cover.cpp
+source/Station_Sensors.cpp
 source/Surface_Temperature.cpp
 source/Turbulence.cpp
 source/Visibility.cpp
