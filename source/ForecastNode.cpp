@@ -1,6 +1,6 @@
 #include "ForecastNode.h"
 Forecast::Forecast(std::vector<std::string>& in_forecast_data)
-{   Function::load_map_dictionary("AMOFSG_Dictionary.txt", map_AMOFSG_Dictionary);
+{ Function::load_map_dictionary("../dictionary/AMOFSG_Dictionary.txt", map_AMOFSG_Dictionary);
 	fcst_time_from_ =in_forecast_data.at(0);
 	fcst_time_to_ =  in_forecast_data.at(1);
 	change_indicator_=in_forecast_data.at(2);
