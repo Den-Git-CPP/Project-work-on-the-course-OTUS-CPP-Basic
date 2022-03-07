@@ -4,8 +4,6 @@
 #include "Function.h"
 #include "Wind.h"
 #include "Wind_Shear.h"
-#include "Visibility.h"
-#include "Wx.h"
 #include "Sky_Cover.h"
 #include "Turbulence.h"
 #include "Icing.h"
@@ -27,10 +25,13 @@ private:
 	std::string change_indicator_{};
 	std::string time_becoming_{};
 	std::string probability_{};
+	std::string wx_string_{};
+	std::string not_decoded_{};
 	Wind* wind=nullptr;						std::vector<std::string> in_wind_data;//ветер
 	Wind_Shear* wind_shear = nullptr;		std::vector<std::string> in_wind_shear_data;//сдвиг ветрва
-	Visibility* visibility = nullptr;		std::vector<std::string> in_visibility_data;//видимость
-	Wx* wx_string = nullptr;				std::vector<std::string> in_wx_data;//явления
+	std::string visibility_statute_mi_{};
+	std::string altim_in_hg_{};
+	std::string vert_vis_ft_{};
 	Sky_Cover* sky_cover = nullptr;			std::vector<std::string> in_sky_cover_data;//формат облачности
 	Turbulence* turbulence = nullptr;		std::vector<std::string> in_turbulence_data; // турбулентность
 	Icing* icing = nullptr;					std::vector<std::string> in_icing_data;// обледенение
