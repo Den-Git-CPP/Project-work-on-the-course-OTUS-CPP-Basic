@@ -67,9 +67,9 @@ std::string Function::replace_station_id_(std::string& station_id_)
 		{
 			station_id_ = map_airport_Dictionary.at(station_id_);
 		}
-		catch (const std::exception&)
-		{
-			station_id_ = "КОД ИКАО НЕ РАСШИФРОВАН";
+		catch (const std::exception& e)
+		{  //  std::cerr << e.what() << "\n Function::replace_wx_string_";
+			station_id_ = "КОД ИКАО "+station_id_+" НЕ РАСШИФРОВАН";
 
 		}
 	}
@@ -77,8 +77,20 @@ std::string Function::replace_station_id_(std::string& station_id_)
 }
 
 std::string Function::replace_wx_string_(std::string& wx_string_)
-{	if (!wx_string_.empty()) {
+{
+	if (!wx_string_.empty()) {
+	
+	try
+	{
 		wx_string_ = map_AMOFSG_Dictionary.at(wx_string_);
+	}
+	catch(const std::exception& e)
+	{
+	//	std::cerr << e.what() << "\n Function::replace_wx_string_";
+		wx_string_ = "  КОД ЯВЛЕНИЯ ПОГОДЫ "+wx_string_+" НЕ РАСШИФРОВАН";
+	}
+		
+		
 	}
 	return wx_string_;
 }
@@ -97,12 +109,12 @@ void Function::replace_sky_cover_(std::string& sky_cover_)
 	if (!sky_cover_.empty()) {
 		if (sky_cover_ == "NSC")	sky_cover_ = "Без существенной облачность ";
 		if (sky_cover_ == "SKC")	sky_cover_ = "Небо чистое ";
-		if (sky_cover_ == "CLR")	sky_cover_ = "Нет облачности ниже 3700м ";
-		if (sky_cover_ == "SCT")	sky_cover_ = "Рассеянная облачность\t ";
-		if (sky_cover_ == "SKT")	sky_cover_ = "SKT";
-		if (sky_cover_ == "BKN")	sky_cover_ = "Значительная облачность ";
+		if (sky_cover_ == "CLR")	sky_cover_ = "Нет облачности ниже 3700м";
+		if (sky_cover_ == "BKN")	sky_cover_ = "Значительная облачность   ";
 		if (sky_cover_ == "FEW")	sky_cover_ = "Незначительная облачность ";
-		if (sky_cover_ == "OVC")	sky_cover_ = "Сплошная облачность\t ";
+		if (sky_cover_ == "OVC")	sky_cover_ = "Сплошная облачность       ";
+		if (sky_cover_ == "SCT")	sky_cover_ = "Рассеянная облачность     ";
+		if (sky_cover_ == "SKT")	sky_cover_ = "SKT";
 		if (sky_cover_ == "OVCX")	sky_cover_ = "OVCX";
 	}
 }
@@ -161,7 +173,7 @@ void Function::inch_to_mm(std::string& inch)
 void Function::inch_to_bar(std::string& inch)
 {// 1 inches of mercury = 0.033863886666667 bars 
 	if (!inch.empty()) {
-		inch = std::to_string(static_cast<int>(stof(inch) * 340));
+		inch = std::to_string(static_cast<int>(stof(inch) * 34));
 	}
 }
  

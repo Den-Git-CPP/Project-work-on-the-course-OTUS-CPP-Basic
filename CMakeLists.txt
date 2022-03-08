@@ -13,6 +13,7 @@ find_library(
 
 add_executable(taf
 main_taf.cpp
+
 source/colored_cout.cpp
 source/ForecastNode.cpp
 source/Function.cpp
@@ -23,10 +24,8 @@ source/Sky_Cover.cpp
 source/Station_Sensors.cpp
 source/Surface_Temperature.cpp
 source/Turbulence.cpp
-source/Visibility.cpp
 source/Wind_Shear.cpp
 source/Wind.cpp
-source/Wx.cpp
 include/download_weather_curl.h
 )
 

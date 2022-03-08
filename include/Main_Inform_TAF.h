@@ -4,8 +4,8 @@
 #include <iterator>
 #include <vector>
 #include <map>
-#include "Function.h"
 #include "colored_cout.h"
+#include "Function.h"
 #include "ForecastNode.h"
 
 
@@ -26,9 +26,9 @@ private:
  std::string valid_time_from_{};
  std::string valid_time_to_{};
  std::string remarks_{};
- float latitude_{};
- float longitude_{};
- float elevation_m_{};
+ std::string latitude_{};
+ std::string longitude_{};
+ std::string elevation_m_{};
  std::vector<Forecast> all_forecast_node;
  Forecast* forecast=nullptr; std::vector<std::string>v_init_forecast;
 

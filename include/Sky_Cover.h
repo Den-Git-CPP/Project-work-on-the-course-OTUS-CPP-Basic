@@ -15,6 +15,7 @@ public:
 	void sky_cover_display();
 
 private:
+	int arguments{};
 	std::string sky_cover_{};
 	std::string cloud_base_ft_agl_{};
 	std::string cloud_type_{};
@@ -27,5 +28,7 @@ private:
 	std::string cloud_base_ft_agl2_{};
 	std::string cloud_type2_{};
 
+	std::string sky_cover3_{};
+	std::string cloud_base_ft_agl3_{};
 };
 

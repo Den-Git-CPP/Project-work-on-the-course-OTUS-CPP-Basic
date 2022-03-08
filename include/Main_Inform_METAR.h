@@ -5,6 +5,7 @@
 #include <iterator>
 #include <vector>
 #include <map>
+#include "colored_cout.h"
 #include "Function.h"
 #include "Wind.h"
 #include "Station_Sensors.h"
@@ -49,5 +50,4 @@ private:
 	std::string vert_vis_ft_{};
 	std::string metar_type_{};
 	std::string elevation_m_{};
-	
 };

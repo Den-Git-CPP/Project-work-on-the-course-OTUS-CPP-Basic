@@ -32,3 +32,4 @@ protected:
 	void inch_to_mm(std::string& inch);
 	void inch_to_bar(std::string& inch);
 };
+

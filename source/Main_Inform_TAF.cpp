@@ -9,9 +9,9 @@ Main_Inform_TAF::Main_Inform_TAF(std::vector<std::string>& in_data)
 	valid_time_from_ = in_data.at(4);
 	valid_time_to_ = in_data.at(5);
 	remarks_=in_data.at(6);
-	latitude_=std::stof(in_data.at(7));
-	longitude_=std::stof(in_data.at(8));
-	elevation_m_=std::stof(in_data.at(9));
+	latitude_=in_data.at(7);
+	longitude_=in_data.at(8);
+	elevation_m_=in_data.at(9);
 	all_forecast_node.reserve(10);
 	auto it = in_data.begin() + 10;
 	Function::load_map_dictionary("../dictionary/NameAirport.txt",map_airport_Dictionary);
@@ -31,7 +31,7 @@ Main_Inform_TAF::~Main_Inform_TAF()
 
 void Main_Inform_TAF::transform()
 {  //отформатирован чистый текст raw_text_taf
-	raw_text_ = replace_raw_taf(raw_text_);
+	raw_text_ = Function::replace_raw_text(raw_text_);
 	//переведено название аэропорта
 	station_id_ = Function::replace_station_id_(station_id_);
 	//отформатировано время из ISO8601 UTC  в необходимый формат UTC
@@ -47,12 +47,13 @@ void Main_Inform_TAF::transform()
 }
 
 void Main_Inform_TAF::display()
-{	cout<< "Дата и время подготовки прогноза: " << issue_time_ << "\n"
+{	cout<<clr::yellow<<"\n\nПРОГНОЗ:"<<clr::white
+		<<"\nДата и время подготовки прогноза: " << issue_time_ << "\n"
 		<< "Время выпуска бюллетеня прогноза: "<< bulletin_time_ << "\n"
 		<< "Действует  с:                     "<< valid_time_from_ << "\n"
 		<< "Действует по:                     "<< valid_time_to_ << "\n"
 		<< "Дополнительная информация:        " << remarks_ << "\n"
-		<<clr::yellow
+		<<clr::cyan
 		<< "Аэропорт:" << station_id_ 
 		<<clr::white<< "\t"
 		<< "Широта:" << latitude_ << "\t"
@@ -61,33 +62,7 @@ void Main_Inform_TAF::display()
 		<< "Сводка:" << raw_text_;
 //отобразили каждый подпрогноз в векторе прогнозов all_forecast_node
  for (auto it = all_forecast_node.begin(); it != all_forecast_node.end(); it++)
-{
-	it->display();
-}
- }
-
-std::string Main_Inform_TAF::replace_raw_taf(const std::string& raw_str_taf)
-{
-	std::istringstream ss(raw_str_taf);
-	std::ostringstream os;
-
-	std::for_each(
-		std::istream_iterator<std::string>(ss),
-		std::istream_iterator<std::string>(),
-		[&](const std::string& s) 
-		{
-			if ((s == "TEMPO") ||
-				(s == "BECMG") ||
-				(s == "FM")
-				)
-			{
-				os << "\n        " << s << " ";
-			}
-			else
-			{
-				os << " " << s;
-			};
+		{it->display();
 		}
-			);
-	return os.str();
 }
+

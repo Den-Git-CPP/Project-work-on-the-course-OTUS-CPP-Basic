@@ -42,11 +42,10 @@ Main_Inform_METAR::~Main_Inform_METAR()
 }
 
 void Main_Inform_METAR::transform()
-{
-	Function::load_map_dictionary("NameAirport.txt", map_airport_Dictionary);
-	Function::load_map_dictionary("AMOFSG_Dictionary.txt", map_AMOFSG_Dictionary);
+{   Function::load_map_dictionary("../dictionary/NameAirport.txt", map_airport_Dictionary);
+	Function::load_map_dictionary("../dictionary/AMOFSG_Dictionary.txt", map_AMOFSG_Dictionary);
 
-	raw_text_ = replace_raw_text(raw_text_ );
+	raw_text_ = Function::replace_raw_text(raw_text_ );
 	station_id_ = Function::replace_station_id_(station_id_);
 	observation_time_ = Function::replace_format_time(observation_time_);
 	wind->wind_transform();
@@ -65,61 +64,49 @@ void Main_Inform_METAR::transform()
 
 void Main_Inform_METAR::display()
 {
-	std::cout << "ФАКТИЧЕСКАЯ ПОГОДА:\nДата и время наблюдения:\t" << observation_time_
+		std::cout<<clr::yellow<<"\nФАКТИЧЕСКАЯ ПОГОДА:"<<clr::white
+		<<"\nДата и время наблюдения:\t" << observation_time_
+		<<clr::cyan
 		<< "\nАэропорт:" << station_id_ 
+		<<clr::white
 		<< "\tШирота:" << latitude_ 
 		<< "\tДолгота:" << longitude_ 
 		<< "\tПревышение:" << elevation_m_
 		<< "\nСводка:" << raw_text_;
 		wind->wind_display();
 		sky_cover->sky_cover_display();
-		if (!wx_string_.empty()) { std::cout << wx_string_; }
-		if (!temp_c_.empty()) 
-		{ std::cout << "\nTемпература воздуха:     " << temp_c_ << " °C"; };
-		if (!dwepoint_c_.empty()) 
-		{ std::cout << "\nTемпература точки росы:  " << dwepoint_c_ << " °C"; };
-		if (!sea_level_pressure_mb_.empty()){
-			std::cout << "\nДавление аэропорта по уровню моря:" << " " << sea_level_pressure_mb_ << " мб.";
-		};
-		if (!altim_in_hg_.empty()) 
-		{ std::cout << "\nДавление аэропорта:"<< altim_in_hg_ << " мм рт.ст."; };
-		if (!flight_category_.empty()) { std::cout << flight_category_; }
-		if (!three_hr_pressure_tendency_mb_.empty()) 
-		{std::cout << "\nИзменение давления за последние 3 часа" << three_hr_pressure_tendency_mb_<< "мб.";};
-		if (!maxT_c_.empty()){
-			std::cout << "\nМаксимальная температура воздуха за последние 6 часов" << maxT_c_ << " °C.";
-		};
-		if (!minT_c_.empty()){
-			std::cout << "\nМинимальная температура воздуха за последние 6 часов" << minT_c_ << " °C.";
-		};
-		if (!maxT24hr_c_.empty()){
-			std::cout << "\nМаксимальная температура воздуха за последние 24 часа: " << maxT24hr_c_ << " °C.";
-		};
-		if (!minT24hr_c_.empty())
-		{
-			std::cout << "\nМинимальная температура воздуха за последние 24 часа: " << minT24hr_c_ << " °C.";
-		};
-		if (!precip_in_.empty())
-		{
-			std::cout << "\nКоличество осадков с момента выпуска крайней сводки METAR: " << precip_in_ << " мм.";
-		};
-		if (!pcp3hr_in_.empty())
-		{
-			std::cout << "\nКоличество осадков за последние 3 часа: " << pcp3hr_in_ << " мм.";
-		};
-		if (!pcp6hr_in_.empty())
-		{
-			std::cout << "\nКоличество осадков за последние 6 часов: " << pcp6hr_in_ << " мм.";
-		};
-		if (!pcp24hr_in_.empty())
-		{
-			std::cout << "\nКоличество осадков за последние 24 часа: " << pcp24hr_in_ << " мм.";
-		};
-		if (!snow_in_.empty())
-		{
-			std::cout << "\nГлубина снежного покрова" << snow_in_ << " мм.";
-		};
-		
+		if (!wx_string_.empty()) { std::cout << wx_string_; 
+		}
+		if (!temp_c_.empty()) { std::cout << "\nTемпература воздуха:     " << temp_c_ << " °C"; 
+		}
+		if (!dwepoint_c_.empty()) { std::cout << "\nTемпература точки росы:  " << dwepoint_c_ << " °C"; 
+		}
+		if (!sea_level_pressure_mb_.empty()){std::cout << "\nДавление аэропорта по уровню моря:" << " " << sea_level_pressure_mb_ << " мб.";
+		}
+		if (!altim_in_hg_.empty()) { std::cout << "\nДавление аэропорта:\t "<< altim_in_hg_ << " мб."; 
+		}
+		if (!flight_category_.empty()) { std::cout << flight_category_; 
+		}
+		if (!three_hr_pressure_tendency_mb_.empty()) {std::cout << "\nИзменение давления за последние 3 часа" << three_hr_pressure_tendency_mb_<< "мб.";
+		}
+		if (!maxT_c_.empty()){std::cout << "\nМаксимальная температура воздуха за последние 6 часов" << maxT_c_ << " °C.";
+		}
+		if (!minT_c_.empty()){std::cout << "\nМинимальная температура воздуха за последние 6 часов" << minT_c_ << " °C.";
+		}
+		if (!maxT24hr_c_.empty()){std::cout << "\nМаксимальная температура воздуха за последние 24 часа: " << maxT24hr_c_ << " °C.";
+		}
+		if (!minT24hr_c_.empty()){std::cout << "\nМинимальная температура воздуха за последние 24 часа: " << minT24hr_c_ << " °C.";
+		}
+		if (!precip_in_.empty()){std::cout << "\nКоличество осадков с момента выпуска крайней сводки METAR: " << precip_in_ << " мм.";
+		}
+		if (!pcp3hr_in_.empty()){std::cout << "\nКоличество осадков за последние 3 часа: " << pcp3hr_in_ << " мм.";
+		}
+		if (!pcp6hr_in_.empty()){std::cout << "\nКоличество осадков за последние 6 часов: " << pcp6hr_in_ << " мм.";
+		}
+		if (!pcp24hr_in_.empty()){std::cout << "\nКоличество осадков за последние 24 часа: " << pcp24hr_in_ << " мм.";
+		}
+		if (!snow_in_.empty()){std::cout << "\nГлубина снежного покрова" << snow_in_ << " мм.";
+		}
 		//Инофрмация от датчиков станции НЕ НУЖНА
 		/*
 		station_sensors->station_sensors_display();

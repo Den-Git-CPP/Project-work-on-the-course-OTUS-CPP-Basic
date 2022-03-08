@@ -13,9 +13,11 @@ Forecast::Forecast(std::vector<std::string>& in_forecast_data)
 	
 	in_wind_shear_data.assign(in_forecast_data.begin() + 8, in_forecast_data.begin() + 11);//сдвиг ветра
 	wind_shear = new Wind_Shear(in_wind_shear_data);
-
+	
+	visibility_statute_mi_= in_forecast_data.at(11);
 	altim_in_hg_= in_forecast_data.at(12);
 	vert_vis_ft_= in_forecast_data.at(13);
+
 	wx_string_= in_forecast_data.at(14);
 	not_decoded_ =in_forecast_data.at(15);
 
@@ -64,13 +66,15 @@ void Forecast::display()
 if (change_indicator_ != "") { std::cout <<"\n"<< change_indicator_; };
 if (time_becoming_ != "") { std::cout <<"начиная c " << time_becoming_; };
 if (probability_ != "") { std::cout << "c вероятностью " << probability_ << "%"; };
+
+// отобразили подкалассыс явлениями
 wind->wind_display();
 wind_shear->wind_shear_display();
 if (visibility_statute_mi_ != "") {std::cout << "\nВидимость:" << " " << visibility_statute_mi_ << " м.";}
 if (altim_in_hg_ != "") {std::cout << "\nДавление аэропорта:" << " " << altim_in_hg_ << " мм рт.ст.";}
 if (vert_vis_ft_ != "") {std::cout << "\nВертикальная видимость: " << " " << vert_vis_ft_ << " м.";}
-if (wx_string_ != "") { std::cout << "\nЯвления: " << wx_string_ << "\n"; }
-if (not_decoded_ != "") { std::cout << "\nне декодировано:" << not_decoded_ << "\n"; }
+if (wx_string_ != "") {std::cout << "\nЯвления: " << wx_string_ << "\n"; }
+if (not_decoded_ != "") {std::cout << "\nне декодировано:" << not_decoded_ << "\n"; }
 sky_cover->sky_cover_display();
 turbulence->turbulence_display();
 icing->icing_display();
