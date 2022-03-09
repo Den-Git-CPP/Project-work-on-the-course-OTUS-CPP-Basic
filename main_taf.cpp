@@ -69,7 +69,9 @@ int main() {
 	raw_data =read_weather_file_vRaw(ICAO_airport_name + "_"+ type_forecast +".txt", type_forecast);
 	Main_Inform_TAF TAF(raw_data);	 
 	TAF.transform();				 
-	TAF.display();	
-								 
+	TAF.display();
+	
+	std::cout<<"\n";
+	std::system("pause");				 
 	std::setlocale(LC_ALL, "English");
 }

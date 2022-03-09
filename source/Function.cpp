@@ -116,6 +116,7 @@ void Function::replace_sky_cover_(std::string& sky_cover_)
 		if (sky_cover_ == "SCT")	sky_cover_ = "Рассеянная облачность     ";
 		if (sky_cover_ == "SKT")	sky_cover_ = "SKT";
 		if (sky_cover_ == "OVCX")	sky_cover_ = "OVCX";
+		if (sky_cover_ == "CAVOK")	sky_cover_ = "Видимость более 10 км, нет облаков ниже 1500 м, нет явлений погоды и облачности ";
 	}
 }
 

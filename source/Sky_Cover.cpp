@@ -36,8 +36,10 @@ arguments = static_cast<int>(in_sky_cover_data.size());
 }
 
 void Sky_Cover::sky_cover_transform()
-{	switch (arguments) {
+{	
+	switch (arguments) {
 	case 8:
+		
 		if (!sky_cover_.empty()) {
 			Function::replace_sky_cover_(sky_cover_);
 			Function::ft_to_m(cloud_base_ft_agl_);
@@ -83,8 +85,10 @@ void Sky_Cover::sky_cover_display()
 {	switch (arguments)
 	{case 8:
 		{if (!sky_cover_.empty()) {
-			std::cout << "\n" << sky_cover_
-				<< " на " << cloud_base_ft_agl_ << " м.";
+			std::cout << "\n" << sky_cover_;
+			if (!cloud_base_ft_agl_.empty()){
+				std::cout << " на " << cloud_base_ft_agl_ << " м.";
+				}
 			}
 		if (!sky_cover1_.empty()) {
 			std::cout << "\n" << sky_cover1_
