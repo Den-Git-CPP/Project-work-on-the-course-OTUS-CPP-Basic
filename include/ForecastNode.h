@@ -11,11 +11,10 @@
 
 using std::cout;
 
-class Forecast:private Function
-{
+class Forecast :private Function {
 public:
 	Forecast();
-	Forecast(std::vector<std::string> &in_forecast_data);
+	Forecast(std::vector<std::string>& in_forecast_data);
 	~Forecast();
 	void forecast_transform();
 	void display();
@@ -27,7 +26,7 @@ private:
 	std::string probability_{};
 	std::string wx_string_{};
 	std::string not_decoded_{};
-	Wind* wind=nullptr;						std::vector<std::string> in_wind_data;//ветер
+	Wind* wind = nullptr;						std::vector<std::string> in_wind_data;//ветер
 	Wind_Shear* wind_shear = nullptr;		std::vector<std::string> in_wind_shear_data;//сдвиг ветрва
 	std::string visibility_statute_mi_{};
 	std::string altim_in_hg_{};

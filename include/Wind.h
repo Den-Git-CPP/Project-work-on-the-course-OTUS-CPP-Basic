@@ -4,12 +4,11 @@
 #include <vector>
 #include "Function.h"
 
-class Wind: private Function
-{
+class Wind : private Function {
 public:
 	Wind();
-	Wind(std::vector<std::string> &in_wind_data);
-	~Wind(){};
+	Wind(std::vector<std::string>& in_wind_data);
+	~Wind() {};
 
 	void wind_transform();
 	void wind_display();

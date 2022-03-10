@@ -5,11 +5,10 @@
 #include<vector>
 #include"Function.h"
 
-class Sky_Cover:private Function
-{
+class Sky_Cover :private Function {
 public:
 	Sky_Cover();
-	Sky_Cover(std::vector<std::string> &in_sky_cover_data);
+	Sky_Cover(std::vector<std::string>& in_sky_cover_data);
 	~Sky_Cover() {};
 	void sky_cover_transform();
 	void sky_cover_display();

@@ -12,8 +12,7 @@
 #include "Sky_Cover.h"
 
 
-class Main_Inform_METAR :private Function
-{
+class Main_Inform_METAR :private Function {
 public:
 	Main_Inform_METAR();
 	Main_Inform_METAR(std::vector<std::string>& in_data);

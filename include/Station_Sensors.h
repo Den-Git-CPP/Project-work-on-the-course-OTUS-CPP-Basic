@@ -4,8 +4,7 @@
 #include <vector>
 #include "Function.h"
 
-class Station_Sensors:public Function
-{
+class Station_Sensors :public Function {
 public:
 	Station_Sensors();
 	Station_Sensors(std::vector<std::string>& in_station_sensors_data);

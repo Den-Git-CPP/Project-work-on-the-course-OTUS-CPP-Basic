@@ -4,13 +4,12 @@
 #include <vector>
 #include "Function.h"
 
-class Icing:public Function
-{
+class Icing :public Function {
 public:
 	Icing();
-	Icing(std::vector<std::string> &in_icing_data);
+	Icing(std::vector<std::string>& in_icing_data);
 	~Icing() {};
-	
+
 	void icing_transform();
 	void icing_display();
 private:

@@ -4,12 +4,11 @@
 #include <vector>
 #include "Function.h"
 
-class Surface_Temperature: private Function
-{
+class Surface_Temperature : private Function {
 public:
 	Surface_Temperature();
-	Surface_Temperature(std::vector<std::string> &in_surface_temperature_data);
-	~Surface_Temperature(){};
+	Surface_Temperature(std::vector<std::string>& in_surface_temperature_data);
+	~Surface_Temperature() {};
 
 	void surface_temperature_transform();
 	void surface_temperature_display();

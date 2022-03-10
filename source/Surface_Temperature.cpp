@@ -1,8 +1,7 @@
 #include "Surface_Temperature.h"
 
-Surface_Temperature::Surface_Temperature(std::vector<std::string> &in_surface_temperature_data)
-{
-	valid_time_= in_surface_temperature_data.at(0);
+Surface_Temperature::Surface_Temperature(std::vector<std::string>& in_surface_temperature_data) {
+	valid_time_ = in_surface_temperature_data.at(0);
 	sfc_temp_c_ = in_surface_temperature_data.at(1);
 	max_or_min_temp_c_ = in_surface_temperature_data.at(2);
 
@@ -11,8 +10,7 @@ Surface_Temperature::Surface_Temperature(std::vector<std::string> &in_surface_te
 	max_or_min_temp_c1_ = in_surface_temperature_data.at(5);
 }
 
-void Surface_Temperature::surface_temperature_transform()
-{
+void Surface_Temperature::surface_temperature_transform() {
 	if (!valid_time_.empty()) {
 		Function::replace_format_time(valid_time_);
 	}
@@ -21,8 +19,7 @@ void Surface_Temperature::surface_temperature_transform()
 	}
 }
 
-void Surface_Temperature::surface_temperature_display()
-{
+void Surface_Temperature::surface_temperature_display() {
 	if (!valid_time_.empty()) {
 		std::cout << valid_time_
 			<< "\nПриземная температура "

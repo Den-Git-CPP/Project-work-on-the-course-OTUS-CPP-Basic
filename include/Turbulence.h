@@ -4,12 +4,11 @@
 #include <vector>
 #include "Function.h"
 
-class Turbulence:private Function
-{
+class Turbulence :private Function {
 public:
 	Turbulence();
-	Turbulence(std::vector<std::string> &in_turbulence_data);
-	~Turbulence(){};
+	Turbulence(std::vector<std::string>& in_turbulence_data);
+	~Turbulence() {};
 	void turbulence_transform();
 	void turbulence_display();
 
