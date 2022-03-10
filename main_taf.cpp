@@ -48,25 +48,58 @@ std::vector<std::string> read_weather_file_vRaw(const std::string& path, const s
 	return vRaw_Element;
 }
 
-int main() {
+int main(int argc, char** argv) {
 	std::setlocale(LC_ALL, "Russian_Russia.1251");
+	std::string type_forecast{};
+	std::vector<std::string>  raw_data;
+	std::string ICAO_airport_name;
 
-	std::cout << clr::yellow << "¬ведите четырехбуквенный кодов ICAO аэропорта\t" << clr::white;
-	std::string ICAO_airport_name; std::cin >> ICAO_airport_name;
-	DownloadFile(ICAO_airport_name);
+	if (argc <= 1) {
+		std::cout << clr::yellow << "¬ведите четырехбуквенный кодов ICAO аэропорта\t" << clr::white;
+		std::cin >> ICAO_airport_name; 
+		DownloadFile(ICAO_airport_name);
+	
+		type_forecast = "METAR";
+		raw_data = read_weather_file_vRaw(ICAO_airport_name + "_" + type_forecast + ".txt", type_forecast);
+		Main_Inform_METAR METAR(raw_data);
+		METAR.transform();
+		METAR.display();
 
-	std::string type_forecast = "METAR";
-	std::vector<std::string>  raw_data = read_weather_file_vRaw(ICAO_airport_name + "_" + type_forecast + ".txt", type_forecast);
-	Main_Inform_METAR METAR(raw_data);
-	METAR.transform();
-	METAR.display();
+		type_forecast = "TAF";
+		raw_data = read_weather_file_vRaw(ICAO_airport_name + "_" + type_forecast + ".txt", type_forecast);
+		Main_Inform_TAF TAF(raw_data);
+		TAF.transform();
+		TAF.display();
+	}
 
-	type_forecast = "TAF";
-	raw_data = read_weather_file_vRaw(ICAO_airport_name + "_" + type_forecast + ".txt", type_forecast);
-	Main_Inform_TAF TAF(raw_data);
-	TAF.transform();
-	TAF.display();
+	if (argc >= 2) {
+		std::string arg1_value{ argv[1] };
+		if (arg1_value == "-metar") {
+			std::cout << clr::yellow << "¬ведите четырехбуквенный кодов ICAO аэропорта\t" << clr::white;
+			std::cin >> ICAO_airport_name;
+			DownloadFile(ICAO_airport_name);
 
+			type_forecast = "METAR";
+			raw_data = read_weather_file_vRaw(ICAO_airport_name + "_" + type_forecast + ".txt", type_forecast);
+			Main_Inform_METAR METAR(raw_data);
+			METAR.transform();
+			METAR.display();
+
+		}
+		
+		if (arg1_value == "-taf") {
+			std::cout << clr::yellow << "¬ведите четырехбуквенный кодов ICAO аэропорта\t" << clr::white;
+			std::cin >> ICAO_airport_name;
+			DownloadFile(ICAO_airport_name);
+
+			type_forecast = "TAF";
+			raw_data = read_weather_file_vRaw(ICAO_airport_name + "_" + type_forecast + ".txt", type_forecast);
+			Main_Inform_TAF TAF(raw_data);
+			TAF.transform();
+			TAF.display();
+		}
+	}
+	
 	std::cout << "\n";
 	std::system("pause");
 	std::setlocale(LC_ALL, "English");

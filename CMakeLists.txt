@@ -11,9 +11,8 @@ find_library(
             ${CURL_PATH}/lib)
 
 
-add_executable(taf
+add_executable(request_
 main_taf.cpp
-
 source/colored_cout.cpp
 source/ForecastNode.cpp
 source/Function.cpp
@@ -30,19 +29,19 @@ include/download_weather_curl.h
 )
 
 target_link_libraries(
-    taf
+    request_
      ${LIB_CURL}
 )
         
 target_include_directories(
-    taf
+    request_
     PRIVATE include 
     PRIVATE "${CURL_PATH}/include"
 )    
 
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR
     CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    target_compile_options(taf PRIVATE 
+    target_compile_options(request_ PRIVATE 
         -g
         -Wall
         -Wextra
@@ -50,7 +49,7 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR
         -pedantic
     )
 elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    target_compile_options(taf PRIVATE
+    target_compile_options(request_ PRIVATE
         /EHsc
         /W4
         /WX
@@ -58,9 +57,9 @@ elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 endif()
 
 set(MY_PROG_PATCH  ${PROJECT_SOURCE_DIR}/!MyProgram)
-install (TARGETS taf DESTINATION ${MY_PROG_PATCH})
+install (TARGETS request_ DESTINATION ${MY_PROG_PATCH})
 install (DIRECTORY dictionary DESTINATION ${MY_PROG_PATCH})
 
-target_compile_features(taf PUBLIC cxx_std_17)
+target_compile_features(request_ PUBLIC cxx_std_17)
 
 
