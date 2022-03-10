@@ -14,8 +14,13 @@ std::vector<std::string>& split(const std::string& data_for_split, char delim, s
 	return elems;
 }
 
-std::vector<std::string> read_weather_file_vRaw(const std::string& path, const std::string& type_forecast) {
+std::vector<std::string> read_weather_file_vRaw(const std::string& path) {
 	std::vector<std::string> m_vRawStruct, vRaw_Element;
+	 
+	 int pos1 = path.find('_') + 1;	
+	 int pos2 = path.find('.');
+    std::string type_forecast = path.substr(pos1, pos2 - pos1);
+
 	std::fstream fin;
 	fin.open("../dictionary/STRUCT_" + type_forecast + ".txt");
 	if (!fin.is_open()) {
@@ -60,13 +65,13 @@ int main(int argc, char** argv) {
 		DownloadFile(ICAO_airport_name);
 	
 		type_forecast = "METAR";
-		raw_data = read_weather_file_vRaw(ICAO_airport_name + "_" + type_forecast + ".txt", type_forecast);
+		raw_data = read_weather_file_vRaw(ICAO_airport_name + "_" + type_forecast + ".txt");
 		Main_Inform_METAR METAR(raw_data);
 		METAR.transform();
 		METAR.display();
 
 		type_forecast = "TAF";
-		raw_data = read_weather_file_vRaw(ICAO_airport_name + "_" + type_forecast + ".txt", type_forecast);
+		raw_data = read_weather_file_vRaw(ICAO_airport_name + "_" + type_forecast + ".txt");
 		Main_Inform_TAF TAF(raw_data);
 		TAF.transform();
 		TAF.display();
@@ -80,7 +85,7 @@ int main(int argc, char** argv) {
 			DownloadFile(ICAO_airport_name);
 
 			type_forecast = "METAR";
-			raw_data = read_weather_file_vRaw(ICAO_airport_name + "_" + type_forecast + ".txt", type_forecast);
+			raw_data = read_weather_file_vRaw(ICAO_airport_name + "_" + type_forecast + ".txt");
 			Main_Inform_METAR METAR(raw_data);
 			METAR.transform();
 			METAR.display();
@@ -93,7 +98,7 @@ int main(int argc, char** argv) {
 			DownloadFile(ICAO_airport_name);
 
 			type_forecast = "TAF";
-			raw_data = read_weather_file_vRaw(ICAO_airport_name + "_" + type_forecast + ".txt", type_forecast);
+			raw_data = read_weather_file_vRaw(ICAO_airport_name + "_" + type_forecast + ".txt");
 			Main_Inform_TAF TAF(raw_data);
 			TAF.transform();
 			TAF.display();
