@@ -1,5 +1,5 @@
 #include "Function.h"
-void Function::load_map_dictionary(const std::string& dictionary_path, std::map<std::string, std::string>& Dictionary_) {
+void Function::load_map_dictionary(const std::filesystem::path& dictionary_path, std::map<std::string, std::string>& Dictionary_) {
 	std::ifstream infile;
 	infile.open(dictionary_path);
 	if (!infile) {
@@ -13,6 +13,7 @@ void Function::load_map_dictionary(const std::string& dictionary_path, std::map<
 	}
 	infile.close();
 }
+
 
 std::string Function::replace_raw_text(std::string& raw_str) {
 	std::istringstream ss(raw_str);

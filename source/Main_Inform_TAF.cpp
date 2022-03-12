@@ -13,9 +13,12 @@ Main_Inform_TAF::Main_Inform_TAF(std::vector<std::string>& in_data) {
 	elevation_m_ = in_data.at(9);
 	all_forecast_node.reserve(10);
 	auto it = in_data.begin() + 10;
-	Function::load_map_dictionary("../dictionary/NameAirport.txt", map_airport_Dictionary);
+	auto currentDir = std::filesystem::current_path();
+	auto dictionary_path = currentDir / "dictionary/NameAirport.txt";
+	dictionary_path.make_preferred();
+	Function::load_map_dictionary(dictionary_path, map_airport_Dictionary);
 
-	while ((it != in_data.end()) and (*it != "")) {
+	while ((it != in_data.end()) && (*it != "")) {
 		v_init_forecast.assign(it, it + 37);
 		Forecast* frc = new Forecast(v_init_forecast);
 		all_forecast_node.push_back(*frc);

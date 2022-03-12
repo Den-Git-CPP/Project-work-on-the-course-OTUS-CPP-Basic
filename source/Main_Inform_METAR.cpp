@@ -41,9 +41,14 @@ Main_Inform_METAR::~Main_Inform_METAR() {
 }
 
 void Main_Inform_METAR::transform() {
-	Function::load_map_dictionary("../dictionary/NameAirport.txt", map_airport_Dictionary);
-	Function::load_map_dictionary("../dictionary/AMOFSG_Dictionary.txt", map_AMOFSG_Dictionary);
+	auto currentDir = std::filesystem::current_path();
+	auto dictionary_path = currentDir / "dictionary/NameAirport.txt";
+	dictionary_path.make_preferred(); 
+	Function::load_map_dictionary(dictionary_path, map_airport_Dictionary);
 
+	dictionary_path = currentDir / "dictionary/AMOFSG_Dictionary.txt";
+	dictionary_path.make_preferred();
+	Function::load_map_dictionary(dictionary_path, map_AMOFSG_Dictionary);
 	raw_text_ = Function::replace_raw_text(raw_text_);
 	station_id_ = Function::replace_station_id_(station_id_);
 	observation_time_ = Function::replace_format_time(observation_time_);

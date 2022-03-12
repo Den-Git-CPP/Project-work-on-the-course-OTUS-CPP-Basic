@@ -5,6 +5,7 @@
 #include <iterator>
 #include <vector>
 #include <map>
+#include <filesystem>
 #include "colored_cout.h"
 #include "Function.h"
 #include "Wind.h"
@@ -28,13 +29,13 @@ private:
 	std::string longitude_{};
 	std::string temp_c_{};
 	std::string dwepoint_c_{};
-	Wind* wind = nullptr; std::vector<std::string> in_wind_data;//ветер
+	Wind* wind = nullptr; std::vector<std::string> in_wind_data;//РІРµС‚РµСЂ
 	std::string visibility_statute_mi_{};
 	std::string altim_in_hg_{};
 	std::string sea_level_pressure_mb_{};
 	Station_Sensors* station_sensors = nullptr; std::vector<std::string> in_station_sensors_data;
 	std::string wx_string_{};
-	Sky_Cover* sky_cover = nullptr; std::vector<std::string> in_sky_cover_data;//формат облачности
+	Sky_Cover* sky_cover = nullptr; std::vector<std::string> in_sky_cover_data;//С„РѕСЂРјР°С‚ РѕР±Р»Р°С‡РЅРѕСЃС‚Рё
 	std::string flight_category_{};
 	std::string three_hr_pressure_tendency_mb_{};
 	std::string maxT_c_{};

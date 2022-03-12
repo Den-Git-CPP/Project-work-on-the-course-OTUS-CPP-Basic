@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <filesystem>
 #include <iomanip>
 #include <iterator>
 #include <algorithm>
@@ -15,7 +16,7 @@ public:
 	std::map<std::string, std::string> map_airport_Dictionary;
 	std::map<std::string, std::string> map_AMOFSG_Dictionary;
 protected:
-	void load_map_dictionary(const std::string& dictionary_path, std::map<std::string, std::string>& Dictionary_);
+	void load_map_dictionary(const std::filesystem::path& dictionary_path, std::map<std::string, std::string>& Dictionary_);
 	std::string replace_raw_text(std::string& raw_str);
 	std::string replace_format_time(const std::string& str_time);
 	std::string replace_station_id_(std::string& station_id_);

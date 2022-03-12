@@ -1,6 +1,8 @@
 #include <iostream>
 #include <cstdlib>
 #include <vector>
+#include <fstream>
+#include <filesystem>
 #include "download_weather_curl.h"
 #include "Main_Inform_METAR.h"
 #include "Main_Inform_TAF.h"
@@ -21,8 +23,10 @@ std::vector<std::string> read_weather_file_vRaw(const std::string& path) {
 	int pos2 = path.find('.');
 	std::string type_forecast = path.substr(pos1, pos2 - pos1);
 	//проверяем стуктуру
+	auto currentDir = std::filesystem::current_path();
+	const std::string name_struct_file = "STRUCT_" + type_forecast + ".txt";
 	std::fstream fin;
-	fin.open("../dictionary/STRUCT_" + type_forecast + ".txt");
+	fin.open(currentDir / "dictionary" / name_struct_file);
 	if (!fin.is_open()) {
 		std::cout << clr::red << "Файл для проверки структуры скаченого файа с прогнозом " << type_forecast << " не найден." << clr::white << std::endl;
 		std::cout << clr::red << "Для работы необходим эталонный файл STRUCT_" << type_forecast << ".txt" << clr::white << std::endl;
@@ -58,23 +62,22 @@ void Work_Forecast(const std::string& ICAO_airport_name, const std::string& type
 
 	if (type_forecast == "METAR") {
 		//std::cout<<"Main_Inform_METAR\n";
-		 Main_Inform_METAR METAR(raw_data);
-		 METAR.transform();
-		 METAR.display();
+		Main_Inform_METAR METAR(raw_data);
+		METAR.transform();
+		METAR.display();
 	}
 	if (type_forecast == "TAF") {
 		//std::cout<<"Main_Inform_TAF\n";
-		 Main_Inform_TAF TAF(raw_data);
-		 TAF.transform();
-		 TAF.display();
+		Main_Inform_TAF TAF(raw_data);
+		TAF.transform();
+		TAF.display();
 	}
 }
 
 
 int main(int argc, char** argv) {
-	std::setlocale(LC_ALL, "Russian_Russia.1251");
+	setlocale(LC_ALL, "Russian_Russia.1251");
 	std::string type_forecast{};
-
 	std::string ICAO_airport_name;
 
 	if (argc <= 1) {
@@ -82,7 +85,7 @@ int main(int argc, char** argv) {
 		std::cin >> ICAO_airport_name;
 		DownloadFile(ICAO_airport_name);
 		type_forecast = "METAR";
-	 	Work_Forecast(ICAO_airport_name, type_forecast);
+		Work_Forecast(ICAO_airport_name, type_forecast);
 		type_forecast = "TAF";
 		Work_Forecast(ICAO_airport_name, type_forecast);
 	}
@@ -109,5 +112,5 @@ int main(int argc, char** argv) {
 
 	std::cout << "\n";
 	std::system("pause");
-	std::setlocale(LC_ALL, "English");
+	setlocale(LC_ALL, "English");
 }
