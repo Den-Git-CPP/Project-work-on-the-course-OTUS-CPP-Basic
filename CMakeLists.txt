@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(TAF_WHTR CXX)
+project(request_ CXX)
 set(CURL_PATH ${CMAKE_CURRENT_SOURCE_DIR}/curl-7.80.0-win64-mingw)
 
 find_library(
@@ -11,7 +11,7 @@ find_library(
             ${CURL_PATH}/lib)
 
 
-add_executable(request_
+add_executable(${CMAKE_PROJECT_NAME}
 main_taf.cpp
 source/colored_cout.cpp
 source/ForecastNode.cpp
@@ -29,19 +29,19 @@ include/download_weather_curl.h
 )
 
 target_link_libraries(
-    request_
+    ${CMAKE_PROJECT_NAME}
      ${LIB_CURL}
 )
         
 target_include_directories(
-    request_
+    ${CMAKE_PROJECT_NAME}
     PRIVATE include 
     PRIVATE "${CURL_PATH}/include"
 )    
 
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR
     CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    target_compile_options(request_ PRIVATE 
+    target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE 
         -g
         -Wall
         -Wextra
@@ -49,17 +49,24 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR
         -pedantic
     )
 elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    target_compile_options(request_ PRIVATE
+    target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE
         /EHsc
         /W4
         /WX
     )
 endif()
+#set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/!MyProgram)
+#"Dictionary copy in: ${CMAKE_SOURCE_DIR}/dictionary"
+add_custom_target(copy_target ALL
+ ${CMAKE_COMMAND} -E copy_directory     ${CMAKE_SOURCE_DIR}/dictionary 
+                                        ${CMAKE_BINARY_DIR}/dictionary 
+                                        DEPENDS ${CMAKE_PROJECT_NAME}
+ )
 
 set(MY_PROG_PATCH  ${PROJECT_SOURCE_DIR}/!MyProgram)
-install (TARGETS request_ DESTINATION ${MY_PROG_PATCH})
+install (TARGETS ${CMAKE_PROJECT_NAME} DESTINATION ${MY_PROG_PATCH})
 install (DIRECTORY dictionary DESTINATION ${MY_PROG_PATCH})
 
-target_compile_features(request_ PUBLIC cxx_std_17)
+target_compile_features(${CMAKE_PROJECT_NAME} PUBLIC cxx_std_17)
 
 
