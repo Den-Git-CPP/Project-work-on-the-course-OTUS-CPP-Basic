@@ -92,18 +92,26 @@ int main(int argc, char** argv) {
 	if (argc >= 2) {
 		std::string arg1_value{ argv[1] };
 		if (arg1_value == "-metar") {
-			std::cout << clr::yellow << "¬ведите четырехбуквенный кодов ICAO аэропорта\t" << clr::white;
-			std::cin >> ICAO_airport_name;
-
+			if (argv[2]) {
+				ICAO_airport_name = argv[2];
+			}
+			else {
+				std::cout << clr::yellow << "¬ведите четырехбуквенный кодов ICAO аэропорта\t" << clr::white;
+				std::cin >> ICAO_airport_name;
+			}
 			DownloadFile(ICAO_airport_name);
 			type_forecast = "METAR";
 			Work_Forecast(ICAO_airport_name, type_forecast);
 		}
 
 		if (arg1_value == "-taf") {
-			std::cout << clr::yellow << "¬ведите четырехбуквенный кодов ICAO аэропорта\t" << clr::white;
-			std::cin >> ICAO_airport_name;
-
+			if (argv[2]) {
+				ICAO_airport_name = argv[2];
+			}
+			else {
+				std::cout << clr::yellow << "¬ведите четырехбуквенный кодов ICAO аэропорта\t" << clr::white;
+				std::cin >> ICAO_airport_name;
+			}
 			DownloadFile(ICAO_airport_name);
 			type_forecast = "TAF";
 			Work_Forecast(ICAO_airport_name, type_forecast);
