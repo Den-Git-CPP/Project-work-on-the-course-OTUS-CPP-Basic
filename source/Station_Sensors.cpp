@@ -12,17 +12,17 @@ Station_Sensors::Station_Sensors(std::vector<std::string>& in_station_sensors_da
 }
 
 void Station_Sensors::station_sensors_transform() {
-	if (!auto_station_.empty()) { auto_station_ = "\nТип автоматизированной станции: " + auto_station_; };
+	if (!auto_station_.empty()) { auto_station_ = "\nРўРёРї Р°РІС‚РѕРјР°С‚РёР·РёСЂРѕРІР°РЅРЅРѕР№ СЃС‚Р°РЅС†РёРё: " + auto_station_; };
 }
 
 void Station_Sensors::station_sensors_display() {
-	std::cout << "\n\nИнформация о датчиках станции METAR.";
-	if (!corrected_.empty()) { std::cout << "\nИсправность->" << corrected_; };
-	if (!auto_wx_.empty()) { std::cout << "\nПолная автоматизация->" << auto_wx_; };
+	std::cout << "\n\nРРЅС„РѕСЂРјР°С†РёСЏ Рѕ РґР°С‚С‡РёРєР°С… СЃС‚Р°РЅС†РёРё METAR.";
+	if (!corrected_.empty()) { std::cout << "\nРСЃРїСЂР°РІРЅРѕСЃС‚СЊ->" << corrected_; };
+	if (!auto_wx_.empty()) { std::cout << "\nРџРѕР»РЅР°СЏ Р°РІС‚РѕРјР°С‚РёР·Р°С†РёСЏ->" << auto_wx_; };
 	if (!auto_station_.empty()) { std::cout << auto_station_; };
-	if (!maintenance_indicator_on_.empty()) { std::cout << "\nТребуется техническое обслуживание->"; }; \
-		if (!no_signal_.empty()) { std::cout << "Автоматический прием сигнала->" << no_signal_; };
-	if (!lightning_sensor_off_.empty()) { std::cout << "\nДатчик обнаружения молнии->" << lightning_sensor_off_; };
-	if (!freezing_rain_sensor_off_.empty()) { std::cout << "\nДатчик ледяного дождя->" << freezing_rain_sensor_off_; };
-	if (!present_weather_sensor_off_.empty()) { std::cout << "\nДатчик текущей погоды->" << present_weather_sensor_off_; };
+	if (!maintenance_indicator_on_.empty()) { std::cout << "\nРўСЂРµР±СѓРµС‚СЃСЏ С‚РµС…РЅРёС‡РµСЃРєРѕРµ РѕР±СЃР»СѓР¶РёРІР°РЅРёРµ->"; }; \
+		if (!no_signal_.empty()) { std::cout << "РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРёР№ РїСЂРёРµРј СЃРёРіРЅР°Р»Р°->" << no_signal_; };
+	if (!lightning_sensor_off_.empty()) { std::cout << "\nР”Р°С‚С‡РёРє РѕР±РЅР°СЂСѓР¶РµРЅРёСЏ РјРѕР»РЅРёРё->" << lightning_sensor_off_; };
+	if (!freezing_rain_sensor_off_.empty()) { std::cout << "\nР”Р°С‚С‡РёРє Р»РµРґСЏРЅРѕРіРѕ РґРѕР¶РґСЏ->" << freezing_rain_sensor_off_; };
+	if (!present_weather_sensor_off_.empty()) { std::cout << "\nР”Р°С‚С‡РёРє С‚РµРєСѓС‰РµР№ РїРѕРіРѕРґС‹->" << present_weather_sensor_off_; };
 }

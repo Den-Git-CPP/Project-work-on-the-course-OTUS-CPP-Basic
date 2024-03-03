@@ -7,11 +7,11 @@ Forecast::Forecast(std::vector<std::string>& in_forecast_data) {
 	time_becoming_ = in_forecast_data.at(3);
 	probability_ = in_forecast_data.at(4);
 
-	//инициализация подклассов явлений в составе Forecast
-	in_wind_data.assign(in_forecast_data.begin() + 5, in_forecast_data.begin() + 8);//ветер
+	//РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РїРѕРґРєР»Р°СЃСЃРѕРІ СЏРІР»РµРЅРёР№ РІ СЃРѕСЃС‚Р°РІРµ Forecast
+	in_wind_data.assign(in_forecast_data.begin() + 5, in_forecast_data.begin() + 8);//РІРµС‚РµСЂ
 	wind = new Wind(in_wind_data);
 
-	in_wind_shear_data.assign(in_forecast_data.begin() + 8, in_forecast_data.begin() + 11);//сдвиг ветра
+	in_wind_shear_data.assign(in_forecast_data.begin() + 8, in_forecast_data.begin() + 11);//СЃРґРІРёРі РІРµС‚СЂР°
 	wind_shear = new Wind_Shear(in_wind_shear_data);
 
 	visibility_statute_mi_ = in_forecast_data.at(11);
@@ -21,16 +21,16 @@ Forecast::Forecast(std::vector<std::string>& in_forecast_data) {
 	wx_string_ = in_forecast_data.at(14);
 	not_decoded_ = in_forecast_data.at(15);
 
-	in_sky_cover_data.assign(in_forecast_data.begin() + 16, in_forecast_data.begin() + 25);//формат облачности
+	in_sky_cover_data.assign(in_forecast_data.begin() + 16, in_forecast_data.begin() + 25);//С„РѕСЂРјР°С‚ РѕР±Р»Р°С‡РЅРѕСЃС‚Рё
 	sky_cover = new Sky_Cover(in_sky_cover_data);
 
-	in_turbulence_data.assign(in_forecast_data.begin() + 25, in_forecast_data.begin() + 28); // турбулентность
+	in_turbulence_data.assign(in_forecast_data.begin() + 25, in_forecast_data.begin() + 28); // С‚СѓСЂР±СѓР»РµРЅС‚РЅРѕСЃС‚СЊ
 	turbulence = new Turbulence(in_turbulence_data);
 
-	in_icing_data.assign(in_forecast_data.begin() + 28, in_forecast_data.begin() + 31);// обледенение
+	in_icing_data.assign(in_forecast_data.begin() + 28, in_forecast_data.begin() + 31);// РѕР±Р»РµРґРµРЅРµРЅРёРµ
 	icing = new Icing(in_icing_data);
 
-	in_surface_temperature_data.assign(in_forecast_data.begin() + 31, in_forecast_data.begin() + 37);//Температура поверхности	
+	in_surface_temperature_data.assign(in_forecast_data.begin() + 31, in_forecast_data.begin() + 37);//РўРµРјРїРµСЂР°С‚СѓСЂР° РїРѕРІРµСЂС…РЅРѕСЃС‚Рё	
 	surface_temperature = new Surface_Temperature(in_surface_temperature_data);
 }
 
@@ -48,7 +48,7 @@ void Forecast::forecast_transform() {
 	fcst_time_to_ = Function::replace_format_time(fcst_time_to_);
 	Function::replace_change_indicator(change_indicator_);
 	time_becoming_ = Function::replace_format_time(time_becoming_);
-	// трансформировали подкалассыс явлениями
+	// С‚СЂР°РЅСЃС„РѕСЂРјРёСЂРѕРІР°Р»Рё РїРѕРґРєР°Р»Р°СЃСЃС‹СЃ СЏРІР»РµРЅРёСЏРјРё
 	wind->wind_transform();
 	wind_shear->wind_shear_transform();
 	Function::mi_to_m(visibility_statute_mi_);
@@ -62,19 +62,19 @@ void Forecast::forecast_transform() {
 }
 
 void Forecast::display() {
-	std::cout << clr::green << "\n\nВ период с " << fcst_time_from_ << " по " << fcst_time_to_ << clr::white;
+	std::cout << clr::green << "\n\nР’ РїРµСЂРёРѕРґ СЃ " << fcst_time_from_ << " РїРѕ " << fcst_time_to_ << clr::white;
 	if (change_indicator_ != "") { std::cout << "\n" << change_indicator_; };
-	if (time_becoming_ != "") { std::cout << "начиная c " << time_becoming_; };
-	if (probability_ != "") { std::cout << "c вероятностью " << probability_ << "%"; };
+	if (time_becoming_ != "") { std::cout << "РЅР°С‡РёРЅР°СЏ c " << time_becoming_; };
+	if (probability_ != "") { std::cout << "c РІРµСЂРѕСЏС‚РЅРѕСЃС‚СЊСЋ " << probability_ << "%"; };
 
-	// отобразили подкалассыс явлениями
+	// РѕС‚РѕР±СЂР°Р·РёР»Рё РїРѕРґРєР°Р»Р°СЃСЃС‹СЃ СЏРІР»РµРЅРёСЏРјРё
 	wind->wind_display();
 	wind_shear->wind_shear_display();
-	if (visibility_statute_mi_ != "") { std::cout << "\nВидимость:" << " " << visibility_statute_mi_ << " м."; }
-	if (altim_in_hg_ != "") { std::cout << "\nДавление аэропорта:" << " " << altim_in_hg_ << " мм рт.ст."; }
-	if (vert_vis_ft_ != "") { std::cout << "\nВертикальная видимость: " << " " << vert_vis_ft_ << " м."; }
-	if (wx_string_ != "") { std::cout << "\nЯвления: " << wx_string_ << "\n"; }
-	if (not_decoded_ != "") { std::cout << "\nне декодировано:" << not_decoded_ << "\n"; }
+	if (visibility_statute_mi_ != "") { std::cout << "\nР’РёРґРёРјРѕСЃС‚СЊ:" << " " << visibility_statute_mi_ << " Рј."; }
+	if (altim_in_hg_ != "") { std::cout << "\nР”Р°РІР»РµРЅРёРµ Р°СЌСЂРѕРїРѕСЂС‚Р°:" << " " << altim_in_hg_ << " РјРј СЂС‚.СЃС‚."; }
+	if (vert_vis_ft_ != "") { std::cout << "\nР’РµСЂС‚РёРєР°Р»СЊРЅР°СЏ РІРёРґРёРјРѕСЃС‚СЊ: " << " " << vert_vis_ft_ << " Рј."; }
+	if (wx_string_ != "") { std::cout << "\nРЇРІР»РµРЅРёСЏ: " << wx_string_ << "\n"; }
+	if (not_decoded_ != "") { std::cout << "\nРЅРµ РґРµРєРѕРґРёСЂРѕРІР°РЅРѕ:" << not_decoded_ << "\n"; }
 	sky_cover->sky_cover_display();
 	turbulence->turbulence_display();
 	icing->icing_display();

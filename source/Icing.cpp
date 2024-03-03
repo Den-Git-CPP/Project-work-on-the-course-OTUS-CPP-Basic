@@ -13,8 +13,8 @@ void Icing::icing_transform() {
 
 void Icing::icing_display() {
 	if (!icing_intensity_.empty()) {
-		std::cout << "\nÎáëåäåíåíèå" << icing_intensity_
-			<< " îò âûñîòû " << icing_min_alt_ft_agl_ << " ì."
-			<< " äî âûñîòû " << icing_min_alt_ft_agl_ << " ì.";
+		std::cout << "\nÐžÐ±Ð»ÐµÐ´ÐµÐ½ÐµÐ½Ð¸Ðµ" << icing_intensity_
+			<< " Ð¾Ñ‚ Ð²Ñ‹ÑÐ¾Ñ‚Ñ‹ " << icing_min_alt_ft_agl_ << " Ð¼."
+			<< " Ð´Ð¾ Ð²Ñ‹ÑÐ¾Ñ‚Ñ‹ " << icing_min_alt_ft_agl_ << " Ð¼.";
 	}
 }

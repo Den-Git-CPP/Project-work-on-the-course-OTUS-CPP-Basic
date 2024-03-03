@@ -1,4 +1,4 @@
-#include "Function.h"
+п»ї#include "Function.h"
 void Function::load_map_dictionary(const std::filesystem::path& dictionary_path, std::map<std::string, std::string>& Dictionary_) {
 	std::ifstream infile;
 	infile.open(dictionary_path);
@@ -42,11 +42,11 @@ std::string Function::replace_format_time(const std::string& str_time) {
 	std::istringstream ss(str_time);
 	std::ostringstream os;
 	ss >> std::get_time(&t, "%Y-%m-%dT%H:%M:%SZ");
-	if (str_time != "") {		//проверка на пустоту
-		if (ss.fail()) {		//проверка на формат
+	if (str_time != "") {		//РїСЂРѕРІРµСЂРєР° РЅР° РїСѓСЃС‚РѕС‚Сѓ
+		if (ss.fail()) {		//РїСЂРѕРІРµСЂРєР° РЅР° С„РѕСЂРјР°С‚
 			std::cout << "Parse DATE_TIME failed\n";
 		}
-		else {					//все норм
+		else {					//РІСЃРµ РЅРѕСЂРј
 			os << std::put_time(&t, "%H:%M:%S %d-%m-%Y  UTC");
 		}
 	}
@@ -62,7 +62,7 @@ std::string Function::replace_station_id_(std::string& station_id_) {
 			station_id_ = map_airport_Dictionary.at(station_id_);
 		}
 		catch (const std::exception& e) {  //  std::cerr << e.what() << "\n Function::replace_wx_string_";
-			station_id_ = "КОД ИКАО " + station_id_ + " НЕ РАСШИФРОВАН";
+			station_id_ = "РљРћР” РРљРђРћ " + station_id_ + " РќР• Р РђРЎРЁРР¤Р РћР’РђРќ";
 
 		}
 	}
@@ -77,7 +77,7 @@ std::string Function::replace_wx_string_(std::string& wx_string_) {
 		}
 		catch (const std::exception& e) {
 			//	std::cerr << e.what() << "\n Function::replace_wx_string_";
-			wx_string_ = "  КОД ЯВЛЕНИЯ ПОГОДЫ " + wx_string_ + " НЕ РАСШИФРОВАН";
+			wx_string_ = "  РљРћР” РЇР’Р›Р•РќРРЇ РџРћР“РћР”Р« " + wx_string_ + " РќР• Р РђРЎРЁРР¤Р РћР’РђРќ";
 		}
 
 
@@ -87,42 +87,42 @@ std::string Function::replace_wx_string_(std::string& wx_string_) {
 
 void Function::replace_change_indicator(std::string& change_indicator_) {
 	if (!change_indicator_.empty()) {
-		if (change_indicator_ == "") change_indicator_ = "ПРОГНОЗ: ";
-		if (change_indicator_ == "TEMPO") change_indicator_ = "ВРЕМЕНАМИ: ";
-		if (change_indicator_ == "BECMG") change_indicator_ = "УСТОЙЧИВО: ";
-		if (change_indicator_ == "FM")	change_indicator_ = "ИЗМЕНЕНИЯ: ";
+		if (change_indicator_ == "") change_indicator_ = "РџР РћР“РќРћР—: ";
+		if (change_indicator_ == "TEMPO") change_indicator_ = "Р’Р Р•РњР•РќРђРњР: ";
+		if (change_indicator_ == "BECMG") change_indicator_ = "РЈРЎРўРћР™Р§РР’Рћ: ";
+		if (change_indicator_ == "FM")	change_indicator_ = "РР—РњР•РќР•РќРРЇ: ";
 	}
 }
 
 void Function::replace_sky_cover_(std::string& sky_cover_) {
 	if (!sky_cover_.empty()) {
-		if (sky_cover_ == "NSC")	sky_cover_ = "Без существенной облачность ";
-		if (sky_cover_ == "SKC")	sky_cover_ = "Небо чистое ";
-		if (sky_cover_ == "CLR")	sky_cover_ = "Нет облачности ниже 3700м";
-		if (sky_cover_ == "BKN")	sky_cover_ = "Значительная облачность   ";
-		if (sky_cover_ == "FEW")	sky_cover_ = "Незначительная облачность ";
-		if (sky_cover_ == "OVC")	sky_cover_ = "Сплошная облачность       ";
-		if (sky_cover_ == "SCT")	sky_cover_ = "Рассеянная облачность     ";
+		if (sky_cover_ == "NSC")	sky_cover_ = "Р‘РµР· СЃСѓС‰РµСЃС‚РІРµРЅРЅРѕР№ РѕР±Р»Р°С‡РЅРѕСЃС‚СЊ ";
+		if (sky_cover_ == "SKC")	sky_cover_ = "РќРµР±Рѕ С‡РёСЃС‚РѕРµ ";
+		if (sky_cover_ == "CLR")	sky_cover_ = "РќРµС‚ РѕР±Р»Р°С‡РЅРѕСЃС‚Рё РЅРёР¶Рµ 3700Рј";
+		if (sky_cover_ == "BKN")	sky_cover_ = "Р—РЅР°С‡РёС‚РµР»СЊРЅР°СЏ РѕР±Р»Р°С‡РЅРѕСЃС‚СЊ   ";
+		if (sky_cover_ == "FEW")	sky_cover_ = "РќРµР·РЅР°С‡РёС‚РµР»СЊРЅР°СЏ РѕР±Р»Р°С‡РЅРѕСЃС‚СЊ ";
+		if (sky_cover_ == "OVC")	sky_cover_ = "РЎРїР»РѕС€РЅР°СЏ РѕР±Р»Р°С‡РЅРѕСЃС‚СЊ       ";
+		if (sky_cover_ == "SCT")	sky_cover_ = "Р Р°СЃСЃРµСЏРЅРЅР°СЏ РѕР±Р»Р°С‡РЅРѕСЃС‚СЊ     ";
 		if (sky_cover_ == "SKT")	sky_cover_ = "SKT";
 		if (sky_cover_ == "OVCX")	sky_cover_ = "OVCX";
-		if (sky_cover_ == "CAVOK")	sky_cover_ = "Видимость более 10 км, нет облаков ниже 1500 м, нет явлений погоды и облачности ";
+		if (sky_cover_ == "CAVOK")	sky_cover_ = "Р’РёРґРёРјРѕСЃС‚СЊ Р±РѕР»РµРµ 10 РєРј, РЅРµС‚ РѕР±Р»Р°РєРѕРІ РЅРёР¶Рµ 1500 Рј, РЅРµС‚ СЏРІР»РµРЅРёР№ РїРѕРіРѕРґС‹ Рё РѕР±Р»Р°С‡РЅРѕСЃС‚Рё ";
 	}
 }
 
 void Function::replace_cloud_type_(std::string& cloud_type_) {
 	if (!cloud_type_.empty()) {
-		if (cloud_type_ == "CB") cloud_type_ = " (кучеводождевая)";
-		if (cloud_type_ == "TCU") cloud_type_ = " (мощно-кучеводождевая)";
+		if (cloud_type_ == "CB") cloud_type_ = " (РєСѓС‡РµРІРѕРґРѕР¶РґРµРІР°СЏ)";
+		if (cloud_type_ == "TCU") cloud_type_ = " (РјРѕС‰РЅРѕ-РєСѓС‡РµРІРѕРґРѕР¶РґРµРІР°СЏ)";
 		if (cloud_type_ == "CU") cloud_type_ = " CU";
 	}
 }
 
 void Function::replace_flight_category_(std::string& flight_category_) {
 	if (!flight_category_.empty()) {
-		if (flight_category_ == "VFR") flight_category_ = "\nУсловия для полетов согласно правилам визуальных полетов \nПОТОЛОК:\tболее 900 м. над уровнем земли.\nВИДИМОСТЬ:\tболее 9 км.";
-		if (flight_category_ == "MVFR") flight_category_ = "\nПредельные условия для полетов согласно правилам визуальных полетов. \nПОТОЛОК:\tот 300 до 900 м. от уровня земли \nВИДИМОСТЬ:\tот 5.5 до 9 км.";
-		if (flight_category_ == "IFR") flight_category_ = "\nУсловия для полетов согласно правилам полетов по приборам. \nПОТОЛОК:\tот 150 до 300 м. от уровня земли \nВИДИМОСТЬ:\tот 1.8 км до 5.5 км.";
-		if (flight_category_ == "LIFR") flight_category_ = "\nПредельные условия для полетов согласно правила полетов на малой высоте по приборам. \nПОТОЛОК:\t   ниже 150 м. над уровнем земли \nВИДИМОСТЬ:\tменее 1.8 км.";
+		if (flight_category_ == "VFR") flight_category_ = "\nРЈСЃР»РѕРІРёСЏ РґР»СЏ РїРѕР»РµС‚РѕРІ СЃРѕРіР»Р°СЃРЅРѕ РїСЂР°РІРёР»Р°Рј РІРёР·СѓР°Р»СЊРЅС‹С… РїРѕР»РµС‚РѕРІ \nРџРћРўРћР›РћРљ:\tР±РѕР»РµРµ 900 Рј. РЅР°Рґ СѓСЂРѕРІРЅРµРј Р·РµРјР»Рё.\nР’РР”РРњРћРЎРўР¬:\tР±РѕР»РµРµ 9 РєРј.";
+		if (flight_category_ == "MVFR") flight_category_ = "\nРџСЂРµРґРµР»СЊРЅС‹Рµ СѓСЃР»РѕРІРёСЏ РґР»СЏ РїРѕР»РµС‚РѕРІ СЃРѕРіР»Р°СЃРЅРѕ РїСЂР°РІРёР»Р°Рј РІРёР·СѓР°Р»СЊРЅС‹С… РїРѕР»РµС‚РѕРІ. \nРџРћРўРћР›РћРљ:\tРѕС‚ 300 РґРѕ 900 Рј. РѕС‚ СѓСЂРѕРІРЅСЏ Р·РµРјР»Рё \nР’РР”РРњРћРЎРўР¬:\tРѕС‚ 5.5 РґРѕ 9 РєРј.";
+		if (flight_category_ == "IFR") flight_category_ = "\nРЈСЃР»РѕРІРёСЏ РґР»СЏ РїРѕР»РµС‚РѕРІ СЃРѕРіР»Р°СЃРЅРѕ РїСЂР°РІРёР»Р°Рј РїРѕР»РµС‚РѕРІ РїРѕ РїСЂРёР±РѕСЂР°Рј. \nРџРћРўРћР›РћРљ:\tРѕС‚ 150 РґРѕ 300 Рј. РѕС‚ СѓСЂРѕРІРЅСЏ Р·РµРјР»Рё \nР’РР”РРњРћРЎРўР¬:\tРѕС‚ 1.8 РєРј РґРѕ 5.5 РєРј.";
+		if (flight_category_ == "LIFR") flight_category_ = "\nРџСЂРµРґРµР»СЊРЅС‹Рµ СѓСЃР»РѕРІРёСЏ РґР»СЏ РїРѕР»РµС‚РѕРІ СЃРѕРіР»Р°СЃРЅРѕ РїСЂР°РІРёР»Р° РїРѕР»РµС‚РѕРІ РЅР° РјР°Р»РѕР№ РІС‹СЃРѕС‚Рµ РїРѕ РїСЂРёР±РѕСЂР°Рј. \nРџРћРўРћР›РћРљ:\t   РЅРёР¶Рµ 150 Рј. РЅР°Рґ СѓСЂРѕРІРЅРµРј Р·РµРјР»Рё \nР’РР”РРњРћРЎРўР¬:\tРјРµРЅРµРµ 1.8 РєРј.";
 	}
 }
 

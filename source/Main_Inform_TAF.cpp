@@ -30,36 +30,36 @@ Main_Inform_TAF::~Main_Inform_TAF() {
 	delete[] forecast;
 }
 
-void Main_Inform_TAF::transform() {  //îòôîðìàòèðîâàí ÷èñòûé òåêñò raw_text_taf
+void Main_Inform_TAF::transform() {  //Ð¾Ñ‚Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½ Ñ‡Ð¸ÑÑ‚Ñ‹Ð¹ Ñ‚ÐµÐºÑÑ‚ raw_text_taf
 	raw_text_ = Function::replace_raw_text(raw_text_);
-	//ïåðåâåäåíî íàçâàíèå àýðîïîðòà
+	//Ð¿ÐµÑ€ÐµÐ²ÐµÐ´ÐµÐ½Ð¾ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ Ð°ÑÑ€Ð¾Ð¿Ð¾Ñ€Ñ‚Ð°
 	station_id_ = Function::replace_station_id_(station_id_);
-	//îòôîðìàòèðîâàíî âðåìÿ èç ISO8601 UTC  â íåîáõîäèìûé ôîðìàò UTC
+	//Ð¾Ñ‚Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¾ Ð²Ñ€ÐµÐ¼Ñ Ð¸Ð· ISO8601 UTC  Ð² Ð½ÐµÐ¾Ð±Ñ…Ð¾Ð´Ð¸Ð¼Ñ‹Ð¹ Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚ UTC
 	issue_time_ = Function::replace_format_time(issue_time_);
 	bulletin_time_ = Function::replace_format_time(bulletin_time_);
 	valid_time_from_ = Function::replace_format_time(valid_time_from_);
 	valid_time_to_ = Function::replace_format_time(valid_time_to_);
-	//ïåðåâåëè êàæäûé ïîäïðîãíîç â âåêòîðå ïðîãíîçîâ all_forecast_node
+	//Ð¿ÐµÑ€ÐµÐ²ÐµÐ»Ð¸ ÐºÐ°Ð¶Ð´Ñ‹Ð¹ Ð¿Ð¾Ð´Ð¿Ñ€Ð¾Ð³Ð½Ð¾Ð· Ð² Ð²ÐµÐºÑ‚Ð¾Ñ€Ðµ Ð¿Ñ€Ð¾Ð³Ð½Ð¾Ð·Ð¾Ð² all_forecast_node
 	for (auto it = all_forecast_node.begin(); it != all_forecast_node.end(); it++) {
 		it->forecast_transform();
 	}
 }
 
 void Main_Inform_TAF::display() {
-	cout << clr::yellow << "\n\nÏÐÎÃÍÎÇ:" << clr::white
-		<< "\nÄàòà è âðåìÿ ïîäãîòîâêè ïðîãíîçà: " << issue_time_ << "\n"
-		<< "Âðåìÿ âûïóñêà áþëëåòåíÿ ïðîãíîçà: " << bulletin_time_ << "\n"
-		<< "Äåéñòâóåò  ñ:                     " << valid_time_from_ << "\n"
-		<< "Äåéñòâóåò ïî:                     " << valid_time_to_ << "\n"
-		<< "Äîïîëíèòåëüíàÿ èíôîðìàöèÿ:        " << remarks_ << "\n"
+	cout << clr::yellow << "\n\nÐŸÐ ÐžÐ“ÐÐžÐ—:" << clr::white
+		<< "\nÐ”Ð°Ñ‚Ð° Ð¸ Ð²Ñ€ÐµÐ¼Ñ Ð¿Ð¾Ð´Ð³Ð¾Ñ‚Ð¾Ð²ÐºÐ¸ Ð¿Ñ€Ð¾Ð³Ð½Ð¾Ð·Ð°: " << issue_time_ << "\n"
+		<< "Ð’Ñ€ÐµÐ¼Ñ Ð²Ñ‹Ð¿ÑƒÑÐºÐ° Ð±ÑŽÐ»Ð»ÐµÑ‚ÐµÐ½Ñ Ð¿Ñ€Ð¾Ð³Ð½Ð¾Ð·Ð°: " << bulletin_time_ << "\n"
+		<< "Ð”ÐµÐ¹ÑÑ‚Ð²ÑƒÐµÑ‚  Ñ:                     " << valid_time_from_ << "\n"
+		<< "Ð”ÐµÐ¹ÑÑ‚Ð²ÑƒÐµÑ‚ Ð¿Ð¾:                     " << valid_time_to_ << "\n"
+		<< "Ð”Ð¾Ð¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ð°Ñ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ñ:        " << remarks_ << "\n"
 		<< clr::cyan
-		<< "Àýðîïîðò:" << station_id_
+		<< "ÐÑÑ€Ð¾Ð¿Ð¾Ñ€Ñ‚:" << station_id_
 		<< clr::white << "\t"
-		<< "Øèðîòà:" << latitude_ << "\t"
-		<< "Äîëãîòà:" << longitude_ << "\t"
-		<< "Ïðåâûøåíèå:" << elevation_m_ << "\n"
-		<< "Ñâîäêà:" << raw_text_;
-	//îòîáðàçèëè êàæäûé ïîäïðîãíîç â âåêòîðå ïðîãíîçîâ all_forecast_node
+		<< "Ð¨Ð¸Ñ€Ð¾Ñ‚Ð°:" << latitude_ << "\t"
+		<< "Ð”Ð¾Ð»Ð³Ð¾Ñ‚Ð°:" << longitude_ << "\t"
+		<< "ÐŸÑ€ÐµÐ²Ñ‹ÑˆÐµÐ½Ð¸Ðµ:" << elevation_m_ << "\n"
+		<< "Ð¡Ð²Ð¾Ð´ÐºÐ°:" << raw_text_;
+	//Ð¾Ñ‚Ð¾Ð±Ñ€Ð°Ð·Ð¸Ð»Ð¸ ÐºÐ°Ð¶Ð´Ñ‹Ð¹ Ð¿Ð¾Ð´Ð¿Ñ€Ð¾Ð³Ð½Ð¾Ð· Ð² Ð²ÐµÐºÑ‚Ð¾Ñ€Ðµ Ð¿Ñ€Ð¾Ð³Ð½Ð¾Ð·Ð¾Ð² all_forecast_node
 	for (auto it = all_forecast_node.begin(); it != all_forecast_node.end(); it++) {
 		it->display();
 	}

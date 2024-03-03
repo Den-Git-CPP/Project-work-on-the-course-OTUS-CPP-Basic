@@ -13,9 +13,9 @@ void Wind::wind_transform() {
 
 void Wind::wind_display() {
 	if (wind_dir_degrees_ != "") {
-		std::cout << "\nÂåòåð: " << wind_dir_degrees_ << "°" << " " << wind_speed_kt_ << " ì/ñ.";
+		std::cout << "\nÐ’ÐµÑ‚ÐµÑ€: " << wind_dir_degrees_ << "Â°" << " " << wind_speed_kt_ << " Ð¼/Ñ.";
 	}
 	if (wind_gust_kt_ != "") {
-		std::cout << " ïîðûâû " << wind_gust_kt_ << "ì/ñ.";;
+		std::cout << " Ð¿Ð¾Ñ€Ñ‹Ð²Ñ‹ " << wind_gust_kt_ << "Ð¼/Ñ.";;
 	}
 }

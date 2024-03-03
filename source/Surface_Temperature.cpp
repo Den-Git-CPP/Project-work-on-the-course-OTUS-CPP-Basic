@@ -22,13 +22,13 @@ void Surface_Temperature::surface_temperature_transform() {
 void Surface_Temperature::surface_temperature_display() {
 	if (!valid_time_.empty()) {
 		std::cout << valid_time_
-			<< "\nÏðèçåìíàÿ òåìïåðàòóðà "
+			<< "\nÐŸÑ€Ð¸Ð·ÐµÐ¼Ð½Ð°Ñ Ñ‚ÐµÐ¼Ð¿ÐµÑ€Ð°Ñ‚ÑƒÑ€Ð° "
 			<< sfc_temp_c_
 			<< max_or_min_temp_c_ << "\n";
 	}
 	if (!valid_time1_.empty()) {
 		std::cout << valid_time1_
-			<< "\nÏðèçåìíàÿ òåìïåðàòóðà "
+			<< "\nÐŸÑ€Ð¸Ð·ÐµÐ¼Ð½Ð°Ñ Ñ‚ÐµÐ¼Ð¿ÐµÑ€Ð°Ñ‚ÑƒÑ€Ð° "
 			<< sfc_temp_c1_
 			<< max_or_min_temp_c1_;
 	}

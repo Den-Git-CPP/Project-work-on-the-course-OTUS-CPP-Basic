@@ -85,37 +85,37 @@ void Sky_Cover::sky_cover_display() {
 	{if (!sky_cover_.empty()) {
 		std::cout << "\n" << sky_cover_;
 		if (!cloud_base_ft_agl_.empty()) {
-			std::cout << " на " << cloud_base_ft_agl_ << " м.";
+			std::cout << " РЅР° " << cloud_base_ft_agl_ << " Рј.";
 		}
 	}
 	if (!sky_cover1_.empty()) {
 		std::cout << "\n" << sky_cover1_
-			<< " на " << cloud_base_ft_agl1_ << " м.";
+			<< " РЅР° " << cloud_base_ft_agl1_ << " Рј.";
 	}
 	if (!sky_cover2_.empty()) {
 		std::cout << "\n" << sky_cover2_
-			<< " на " << cloud_base_ft_agl2_ << " м.";
+			<< " РЅР° " << cloud_base_ft_agl2_ << " Рј.";
 	}
 	if (!sky_cover2_.empty()) {
 		std::cout << "\n" << sky_cover3_
-			<< " на " << cloud_base_ft_agl3_ << " м.";
+			<< " РЅР° " << cloud_base_ft_agl3_ << " Рј.";
 	}
 	}
 	break;
 	case 9:
 	{if (!sky_cover_.empty()) {
 		std::cout << "\n" << sky_cover_
-			<< " на " << cloud_base_ft_agl_ << " м."
+			<< " РЅР° " << cloud_base_ft_agl_ << " Рј."
 			<< cloud_type_;
 	}
 	if (!sky_cover1_.empty()) {
 		std::cout << "\n" << sky_cover1_
-			<< " на " << cloud_base_ft_agl1_ << " м."
+			<< " РЅР° " << cloud_base_ft_agl1_ << " Рј."
 			<< cloud_type1_;
 	}
 	if (!sky_cover2_.empty()) {
 		std::cout << "\n" << sky_cover2_
-			<< " на " << cloud_base_ft_agl2_ << " м."
+			<< " РЅР° " << cloud_base_ft_agl2_ << " Рј."
 			<< cloud_type2_;
 	}
 	}

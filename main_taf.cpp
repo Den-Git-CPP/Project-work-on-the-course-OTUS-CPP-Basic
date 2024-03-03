@@ -1,4 +1,4 @@
-#include <iostream>
+п»ї#include <iostream>
 #include <cstdlib>
 #include <vector>
 #include <fstream>
@@ -18,18 +18,18 @@ std::vector<std::string>& split(const std::string& data_for_split, char delim, s
 
 std::vector<std::string> read_weather_file_vRaw(const std::string& path) {
 	std::vector<std::string> m_vRawStruct, vRaw_Element;
-	//берем префикс
+	//Р±РµСЂРµРј РїСЂРµС„РёРєСЃ
 	int pos1 = path.find('_') + 1;
 	int pos2 = path.find('.');
 	std::string type_forecast = path.substr(pos1, pos2 - pos1);
-	//проверяем стуктуру
+	//РїСЂРѕРІРµСЂСЏРµРј СЃС‚СѓРєС‚СѓСЂСѓ
 	auto currentDir = std::filesystem::current_path();
 	const std::string name_struct_file = "STRUCT_" + type_forecast + ".txt";
 	std::fstream fin;
 	fin.open(currentDir / "dictionary" / name_struct_file);
 	if (!fin.is_open()) {
-		std::cout << clr::red << "Файл для проверки структуры скаченого файа с прогнозом " << type_forecast << " не найден." << clr::white << std::endl;
-		std::cout << clr::red << "Для работы необходим эталонный файл STRUCT_" << type_forecast << ".txt" << clr::white << std::endl;
+		std::cout << clr::red << "Р¤Р°Р№Р» РґР»СЏ РїСЂРѕРІРµСЂРєРё СЃС‚СЂСѓРєС‚СѓСЂС‹ СЃРєР°С‡РµРЅРѕРіРѕ С„Р°Р№Р° СЃ РїСЂРѕРіРЅРѕР·РѕРј " << type_forecast << " РЅРµ РЅР°Р№РґРµРЅ." << clr::white << std::endl;
+		std::cout << clr::red << "Р”Р»СЏ СЂР°Р±РѕС‚С‹ РЅРµРѕР±С…РѕРґРёРј СЌС‚Р°Р»РѕРЅРЅС‹Р№ С„Р°Р№Р» STRUCT_" << type_forecast << ".txt" << clr::white << std::endl;
 		exit(EXIT_FAILURE);
 	}
 	std::string Struct_Taf_Forecast_etalon;
@@ -81,7 +81,7 @@ int main(int argc, char** argv) {
 	std::string ICAO_airport_name;
 
 	if (argc <= 1) {
-		std::cout << clr::yellow << "Введите четырехбуквенный кодов ICAO аэропорта\t" << clr::white;
+		std::cout << clr::yellow << "Р’РІРµРґРёС‚Рµ С‡РµС‚С‹СЂРµС…Р±СѓРєРІРµРЅРЅС‹Р№ РєРѕРґРѕРІ ICAO Р°СЌСЂРѕРїРѕСЂС‚Р°\t" << clr::white;
 		std::cin >> ICAO_airport_name;
 		DownloadFile(ICAO_airport_name);
 		type_forecast = "METAR";
@@ -96,7 +96,7 @@ int main(int argc, char** argv) {
 				ICAO_airport_name = argv[2];
 			}
 			else {
-				std::cout << clr::yellow << "Введите четырехбуквенный кодов ICAO аэропорта\t" << clr::white;
+				std::cout << clr::yellow << "Р’РІРµРґРёС‚Рµ С‡РµС‚С‹СЂРµС…Р±СѓРєРІРµРЅРЅС‹Р№ РєРѕРґРѕРІ ICAO Р°СЌСЂРѕРїРѕСЂС‚Р°\t" << clr::white;
 				std::cin >> ICAO_airport_name;
 			}
 			DownloadFile(ICAO_airport_name);
@@ -109,7 +109,7 @@ int main(int argc, char** argv) {
 				ICAO_airport_name = argv[2];
 			}
 			else {
-				std::cout << clr::yellow << "Введите четырехбуквенный кодов ICAO аэропорта\t" << clr::white;
+				std::cout << clr::yellow << "Р’РІРµРґРёС‚Рµ С‡РµС‚С‹СЂРµС…Р±СѓРєРІРµРЅРЅС‹Р№ РєРѕРґРѕРІ ICAO Р°СЌСЂРѕРїРѕСЂС‚Р°\t" << clr::white;
 				std::cin >> ICAO_airport_name;
 			}
 			DownloadFile(ICAO_airport_name);

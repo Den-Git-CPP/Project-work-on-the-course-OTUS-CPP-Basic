@@ -13,8 +13,8 @@ void Turbulence::turbulence_transform() {
 
 void Turbulence::turbulence_display() {
 	if (!turbulence_intensity_.empty()) {
-		std::cout << "\nÒóðáóëåíòñíîñòü" << turbulence_intensity_
-			<< " îò âûñîòû " << turbulence_min_alt_ft_agl_ << " ì."
-			<< " äî âûñîòû " << turbulence_max_alt_ft_agl_ << " ì.";
+		std::cout << "\nÐ¢ÑƒÑ€Ð±ÑƒÐ»ÐµÐ½Ñ‚ÑÐ½Ð¾ÑÑ‚ÑŒ" << turbulence_intensity_
+			<< " Ð¾Ñ‚ Ð²Ñ‹ÑÐ¾Ñ‚Ñ‹ " << turbulence_min_alt_ft_agl_ << " Ð¼."
+			<< " Ð´Ð¾ Ð²Ñ‹ÑÐ¾Ñ‚Ñ‹ " << turbulence_max_alt_ft_agl_ << " Ð¼.";
 	}
 }
