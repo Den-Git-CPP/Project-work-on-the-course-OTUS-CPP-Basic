@@ -1,5 +1,4 @@
 #pragma once
-
 #define CURL_STATICLIB
 #include "curl/curl.h"
 #include <cstdio>
@@ -9,6 +8,7 @@
 #include <chrono>
 #include <iomanip>
 #include <sstream>
+
 
 using time_point = std::chrono::system_clock::time_point;
 
@@ -56,31 +56,35 @@ void CurlDownload(const std::string& local_pth_airport_weather, const std::strin
 
 	curl_global_cleanup();
 }/* Download */
-void DownloadFile(std::string& ICAO_airport_name) {
+void DownloadFile(const std::string& ICAO_airport_name) {
 	std::chrono::duration<int, std::ratio<14400> > delta_TAF(1);// 3 hours
 	std::chrono::system_clock::time_point end = std::chrono::system_clock::now();
 	std::chrono::system_clock::time_point start = end - delta_TAF;
 
 	std::string local_pth_airport_weather{};
 	std::string http_link_airport_weather{};
-	http_link_airport_weather = "https://www.aviationweather.gov/adds/dataserver_current/httpparam?dataSource=tafs&requestType=retrieve&format=csv&startTime="
-		+ TimeGMTFormatToString(start, "%Y-%m-%dT%H:%M:%SZ")
-		+ "&endTime="
-		+ TimeGMTFormatToString(end, "%Y-%m-%dT%H:%M:%SZ")
-		+ "&timeType=issue&stationString=" + ICAO_airport_name;
+
+http_link_airport_weather="https://aviationweather.gov/api/data/dataserver?requestType=retrieve&dataSource=tafs&stationString="+ICAO_airport_name+"&startTime="
++ TimeGMTFormatToString(start, "%Y-%m-%dT%H:%M:%SZ") //2024-01-19T02%3A33%3A06Z
++"&endTime="
++ TimeGMTFormatToString(end, "%Y-%m-%dT%H:%M:%SZ")//2024-01-19T04%3A33%3A06Z
++"&format=csv";
+
 	local_pth_airport_weather = ICAO_airport_name + "_TAF.txt";
+	
 	CurlDownload(local_pth_airport_weather, http_link_airport_weather);
 
 	std::chrono::duration<int, std::ratio<3600> > delta_METAR(1);// 30min
 	start = end - delta_METAR;
 
-	http_link_airport_weather = "https://www.aviationweather.gov/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=csv&startTime="
-		+ TimeGMTFormatToString(start, "%Y-%m-%dT%H:%M:%SZ")
-		+ "&endTime="
-		+ TimeGMTFormatToString(end, "%Y-%m-%dT%H:%M:%SZ")
-		+ "&stationString=" + ICAO_airport_name;
+http_link_airport_weather="https://aviationweather.gov/api/data/dataserver?requestType=retrieve&dataSource=metars&stationString="+ICAO_airport_name+"&startTime="
++ TimeGMTFormatToString(start, "%Y-%m-%dT%H:%M:%SZ") //2024-01-19T02%3A33%3A06Z
++"&endTime="
++ TimeGMTFormatToString(end, "%Y-%m-%dT%H:%M:%SZ")//2024-01-19T04%3A33%3A06Z
++"&format=csv";
 
 	local_pth_airport_weather = ICAO_airport_name + "_METAR.txt";
+	
 	CurlDownload(local_pth_airport_weather, http_link_airport_weather);
 }
 
