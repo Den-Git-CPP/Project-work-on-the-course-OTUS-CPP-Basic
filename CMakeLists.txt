@@ -1,36 +1,50 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.28)
 
 project(REQUEST_TAF_METAR)
-set(CMAKE_CXX_STANDARD 20)
 
-find_package(CURL) 
-if(CURL_FOUND)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+#===============================CURL_LIBRARY===================================
+#set( CURL_LIBRARY      ${CMAKE_SOURCE_DIR}/curl-8.6.0_7-win64-mingw/lib )
+#set( CURL_INCLUDE_DIR  ${CMAKE_SOURCE_DIR}/curl-8.6.0_7-win64-mingw/include )
+#add_definitions("-DCURL_STATICLIB")
+option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
+
+find_package(CURL)
+  if(CURL_FOUND)
+    message(STATUS "CURL found" )  
     message(STATUS "Found CURL version: ${CURL_VERSION_STRING}")
     message(STATUS "Using CURL include dir(s): ${CURL_INCLUDE_DIRS}")
     message(STATUS "Using CURL lib(s): ${CURL_LIBRARIES}")
-  else()
-    #set(CURL_PATH ${CMAKE_CURRENT_SOURCE_DIR}/curl-7.80.0-win64-mingw)
-    #
-    #find_library(
-    #        LIB_CURL
-    #        NAMES
-    #            curl
-    #        PATHS 
-    #            ${CURL_PATH}/lib)
-    #
-    #OR
-    #
-    #message(STATUS "Fetching CURL")
-    #include(FetchContent)
-    #FetchContent_Declare(      
-    #CURL
-    #URL https://curl.se/download/curl-8.6.0.zip 
-    #DOWNLOAD_EXTRACT_TIMESTAMP true
-    #OVERRIDE_FIND_PACKAGE
-    #)
-    #
-    #FetchContent_MakeAvailable(CURL)
-  endif()
+    include_directories( ${CURL_INCLUDE_DIRS} )
+    link_directories( ${CURL_LIBRARIES} )
+    add_library(CURL STATIC IMPORTED)
+  else()   
+    message(STATUS "DOWNLOAD CURL https://curl.se/windows" )
+    #https://www.foonathan.net/2022/06/cmake-fetchcontent/
+    #Bring in the CURL library
+    include(FetchContent)
+    FetchContent_Declare(
+    curl
+    URL https://curl.se/windows/dl-8.6.0_7/curl-8.6.0_7-win64-mingw.zip
+    DOWNLOAD_EXTRACT_TIMESTAMP true
+     )
+    FetchContent_MakeAvailable(CURL)
+    #https://stackoverflow.com/questions/63311116/how-to-find-the-source-directory-of-package-downloaded-via-fetchcontent
+    set(CURL_LIBRARY ${curl_SOURCE_DIR}/lib )           
+    set(CURL_INCLUDE_DIR  ${curl_SOURCE_DIR}/include )
+    find_package(CURL)
+     if(CURL_FOUND)
+        message(STATUS "Found CURL version: ${CURL_VERSION_STRING}")
+        message(STATUS "Using CURL include dir(s): ${CURL_INCLUDE_DIRS}")
+        message(STATUS "Using CURL lib(s): ${CURL_LIBRARIES}")
+        include_directories( ${CURL_INCLUDE_DIRS} )
+        link_directories( ${CURL_LIBRARIES} )
+        add_library(CURL STATIC IMPORTED)
+      endif()
+ endif()
+#==============================================================================
 
 set(PROJECT_HEADERS
 include/colored_cout.h 
@@ -66,20 +80,19 @@ source/Wind.cpp
 add_executable(${CMAKE_PROJECT_NAME}
   ${PROJECT_HEADERS}
   ${PROJECT_SOURCES}
-main_taf.cpp
+main.cpp
 )
 
 target_include_directories(
     ${CMAKE_PROJECT_NAME}
     PRIVATE include 
-    PRIVATE "${CURL_INCLUDE_DIRS}/include"    # PRIVATE "${CURL_PATH}/include"
-)  
+) 
+
 target_link_libraries(
     ${CMAKE_PROJECT_NAME}
-    PRIVATE 
-    CURL::libcurl #  ${LIB_CURL}
+    PRIVATE libcurl #wldap32 winmm ws2_32 advapi32 crypt32 
 )
-
+  
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR
     CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE 
@@ -96,16 +109,19 @@ elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
         /WX
     )
 endif()
-#"Dictionary copy in: ${CMAKE_SOURCE_DIR}/dictionary"
-add_custom_command(TARGET ${CMAKE_PROJECT_NAME}
-COMMAND ${CMAKE_COMMAND} -E copy_directory
-        ${CMAKE_SOURCE_DIR}/dictionary
-        ${CMAKE_BINARY_DIR}/dictionary
-)
 
 #set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/!MyProgram)
-#set(MY_PROG_PATCH  ${PROJECT_SOURCE_DIR}/!MyProgram)
-#install (TARGETS ${CMAKE_PROJECT_NAME} DESTINATION ${MY_PROG_PATCH})
-#install (DIRECTORY dictionary DESTINATION ${MY_PROG_PATCH})
+#"Dictionary copy in: ${CMAKE_SOURCE_DIR}/dictionary"
+add_custom_target(copy_target ALL
+ ${CMAKE_COMMAND} -E copy_directory     ${CMAKE_SOURCE_DIR}/dictionary 
+                                        ${CMAKE_BINARY_DIR}/dictionary 
+                                        DEPENDS ${CMAKE_PROJECT_NAME}
+ )
+#
+set(MY_PROG_PATCH  ${PROJECT_SOURCE_DIR}/!MyProgram)
+install (TARGETS ${CMAKE_PROJECT_NAME} DESTINATION ${MY_PROG_PATCH})
+install (DIRECTORY dictionary DESTINATION ${MY_PROG_PATCH})
+
+
 
 
